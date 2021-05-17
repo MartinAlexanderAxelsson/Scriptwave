@@ -120,9 +120,7 @@ export default function Oscillators() {
   const [delaySlider, setDelaySlider] = useState(0)
   const [delayOnOff, setDelayOnOff] = useState(0)
 
-//   const [keyMappingWhite, setKeyMappingWhite] = useState("key-mapping")
-//   const [keyMappingBlack, setKeyMappingBlack] = useState("key-mapping__black")
-
+  const [darkmode, setDarkmode] = useState(true)
   const [keyMapping, setKeyMapping] = useState({
       white: "key-mapping",
       black: "key-mapping__black"
@@ -326,7 +324,7 @@ export default function Oscillators() {
         Number(envelope_R_Slider)
     )
   }
-  console.log(delayOnOff)
+
   return (
     <div>
       <Controls
@@ -365,10 +363,12 @@ export default function Oscillators() {
     
     
         setKeyMapping={setKeyMapping}
+        darkmode={darkmode}
+        setDarkmode={setDarkmode}
       />
       <Keyboard
         keyMapping={keyMapping}
-    
+        darkmode={darkmode}
         notes={notes}
         //delayOnOff={delayOnOff}
         waveForms={waveForms}

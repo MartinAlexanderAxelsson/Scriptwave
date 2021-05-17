@@ -34,8 +34,10 @@ export default function Controls({
   octaveDown,
   keyMapping,
   setKeyMapping,
+  darkmode,
+  setDarkmode
 }) {
-  function toggleChecked() {
+  function toggleCheckedKeyMapping() {
     if (keyMapping.white === "key-mapping__hidden") {
       setKeyMapping({
         ...keyMapping,
@@ -51,6 +53,8 @@ export default function Controls({
     }
   }
 
+  const toggleCheckedDarkmode = () => setDarkmode((checked) => !checked)
+ 
   useEffect(() => {
     console.log(keyMapping)
     if (delaySlider == 0) {
@@ -216,10 +220,16 @@ export default function Controls({
           name="mapping"
           value={1}
           defaultChecked={keyMapping}
-          onChange={toggleChecked}
+          onChange={toggleCheckedKeyMapping}
         />
         <label>Mapping</label>
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          name="mapping"
+          value={1}
+          defaultChecked={darkmode}
+          onChange={toggleCheckedDarkmode}
+        />
         <label>Darkmode</label>
       </div>
     </div>

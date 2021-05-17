@@ -3,6 +3,8 @@ $border-radius: 0px 0px 100px 100px;
 $height: 180px;
 $width: 65px;
 $border: none;
+$outline: none;
+
 
 .keyboard {
   margin: 0;
@@ -14,148 +16,6 @@ $border: none;
     // margin: 0px 0px -200px 0px;
     display: flex;
     flex-direction: row;
-
-    &__key {
-      height: 250px;
-      width: 80px;
-      background-color: aqua;
-      border: 2px solid rgb(71, 88, 88);
-    }
-    &__key-hit {
-      height: 250px;
-      width: 80px;
-      background-color: aqua;
-      border: 2px solid rgb(71, 88, 88);
-      animation: 1s ease-out keyHitWhite;
-      animation-iteration-count: 1;
-    }
-    &__key-hit2 {
-      height: 250px;
-      width: 80px;
-      background-color: aqua;
-      border: 2px solid rgb(71, 88, 88);
-      animation: 1s ease-out keyHitWhite2;
-      animation-iteration-count: 1;
-    }
-    &__key-first {
-      border-radius: 0px 0px 0px 20px;
-      height: 250px;
-      width: 80px;
-      background-color: aqua;
-      border: 2px solid rgb(71, 88, 88);
-    }
-    &__key-last {
-      // z-index: 0;
-      border-radius: 0px 0px 20px 0px;
-      height: 250px;
-      width: 80px;
-      background-color: aqua;
-      border: 2px solid rgb(71, 88, 88);
-    }
-  }
-
-  &__black-key-1 {
-    z-index: 1;
-    margin: 0px 1px 10px -834px;
-    height: $height;
-    width: $width;
-    background-color: $background-color;
-    border-radius: $border-radius;
-    border: $border;
-  }
-  &__black-key-2 {
-    z-index: 1;
-    margin: 0px 0px 0px 15px;
-    height: $height;
-    width: $width;
-    background-color: $background-color;
-    border-radius: $border-radius;
-    border: $border;
-  }
-  &__black-key-3 {
-    z-index: 1;
-    margin: 0px 0px 0px 15px;
-    height: $height;
-    width: $width;
-    background-color: $background-color;
-    border-radius: $border-radius;
-    border: $border;
-  }
-  &__black-key-4 {
-    z-index: 1;
-    margin: 0px 0px 0px 95px;
-    height: $height;
-    width: $width;
-    background-color: $background-color;
-    border-radius: $border-radius;
-    border: $border;
-  }
-  &__black-key-5 {
-    z-index: 1;
-    margin: 0px 0px 0px 15px;
-    height: $height;
-    width: $width;
-    background-color: $background-color;
-    border-radius: $border-radius;
-    border: $border;
-  }
-  &__black-key-6 {
-    z-index: 1;
-    margin: 0px 0px 0px 15px;
-    height: $height;
-    width: $width;
-    background-color: $background-color;
-    border-radius: $border-radius;
-    border: $border;
-  }
-  &__black-key-7 {
-    z-index: 1;
-    margin: 0px 0px 0px 95px;
-    height: $height;
-    width: $width;
-    background-color: $background-color;
-    border-radius: $border-radius;
-    border: $border;
-  }
-  &__black-key-8 {
-    z-index: 1;
-    margin: 0px 0px 0px 15px;
-    height: $height;
-    width: $width;
-    background-color: $background-color;
-    border-radius: $border-radius;
-    border: $border;
-  }
-  &__black-key-8__hit {
-    z-index: 1;
-    margin: 0px 0px 0px 15px;
-    height: $height;
-    width: $width;
-    background-color: $background-color;
-    border-radius: $border-radius;
-    border: $border;
-    animation: 1s ease-out keyHitBlack;
-    animation-iteration-count: 1;
-  }
-  &__black-key-8__hit-2 {
-    z-index: 1;
-    margin: 0px 0px 0px 15px;
-    height: $height;
-    width: $width;
-    background-color: $background-color;
-    border-radius: $border-radius;
-    border: $border;
-    animation: 1s ease-out keyHitBlack2;
-    animation-iteration-count: 1;
-  }
-
-  &__black-key-8:focus:not(:active) {
-    animation: 1s ease-out keyHitBlack;
-    animation-iteration-count: 1;
-  }
-  &__black-key-8__hit-2:focus:not(:active) {
-    animation: 1s ease-out keyHitBlack2;
-    animation-iteration-count: 1;
   }
 }
 
@@ -194,23 +54,7 @@ $border: none;
     background-color: rgb(189, 221, 218);
   }
 }
-// @keyframes keyHitWhiteFocus {
-//     from {
-//       background: rgb(251, 176, 59);
-//     }
-//     to {
-//       background-color: rgb(189, 221, 218);
-//     }
-//   }
 
-//   @keyframes keyHitWhiteFocus2 {
-//     from {
-//       background: rgb(251, 176, 59);
-//     }
-//     to {
-//       background-color: rgb(189, 221, 218);
-//     }
-//   }
 .key-mapping {
   visibility: visible;
   margin-top: 200px;
@@ -247,18 +91,6 @@ $border: none;
 
 //----------------white keys----------------
 
-// .KeyA:focus:not(:active),
-// .KeyA-hit:focus:not(:active),
-// .KeyA-hit2:focus:not(:active) {
-//     animation: 1s ease-out keyHitWhiteFocus;
-//     animation-iteration-count: 1;
-// }
-// .Quote:focus:not(:active),
-// .Quote-hit:focus:not(:active),
-// .Quote-hit2:focus:not(:active) {
-//     animation: 1s ease-out keyHitWhiteFocus2;
-//     animation-iteration-count: 1;
-// }
 .KeyA,
 .KeyA-hit,
 .KeyA-hit2 {
@@ -340,7 +172,54 @@ $border: none;
   animation-iteration-count: 1;
 }
 
-//---------------black keys-----------------
+//______FOCUS______
+
+.KeyA:focus:active,
+.KeyS:focus:active,
+.KeyD:focus:active,
+.KeyF:focus:active,
+.KeyG:focus:active,
+.KeyH:focus:active,
+.KeyJ:focus:active,
+.KeyK:focus:active,
+.KeyL:focus:active,
+.Semicolon:focus:active,
+.Quote:focus:active {
+  animation: 1s ease-out keyHitWhite;
+  animation-iteration-count: 1;
+}
+.KeyA-hit:focus:active,
+.KeyS-hit:focus:active,
+.KeyD-hit:focus:active,
+.KeyF-hit:focus:active,
+.KeyG-hit:focus:active,
+.KeyH-hit:focus:active,
+.KeyJ-hit:focus:active,
+.KeyK-hit:focus:active,
+.KeyL-hit:focus:active,
+.Semicolon-hit:focus:active,
+.Quote-hit:focus:active {
+  animation: 1s ease-out keyHitWhite2;
+  animation-iteration-count: 1;
+}
+.KeyA-hit2:focus:active,
+.KeyS-hit2:focus:active,
+.KeyD-hit2:focus:active,
+.KeyF-hit2:focus:active,
+.KeyG-hit2:focus:active,
+.KeyH-hit2:focus:active,
+.KeyJ-hit2:focus:active,
+.KeyK-hit2:focus:active,
+.KeyL-hit2:focus:active,
+.Semicolon-hit2:focus:active,
+.Quote-hit2:focus:active {
+  animation: 1s ease-out keyHitWhite;
+  animation-iteration-count: 1;
+}
+
+//------------------------------------------
+//---------------BLACK KEYS-----------------
+//------------------------------------------
 
 .KeyW,
 .KeyW-hit,
@@ -419,5 +298,41 @@ $border: none;
 .KeyP-hit2,
 .BracketLeft-hit2 {
   animation: 1s ease-out keyHitBlack2;
+  animation-iteration-count: 1;
+}
+
+//______FOCUS______
+
+.KeyW:focus:active,
+.KeyE:focus:active,
+.KeyR:focus:active,
+.KeyY:focus:active,
+.KeyU:focus:active,
+.KeyO:focus:active,
+.KeyP:focus:active,
+.BracketLeft:focus:active {
+  animation: 1s ease-out keyHitBlack;
+  animation-iteration-count: 1;
+}
+.KeyW-hit:focus:active,
+.KeyE-hit:focus:active,
+.KeyR-hit:focus:active,
+.KeyY-hit:focus:active,
+.KeyU-hit:focus:active,
+.KeyO-hit:focus:active,
+.KeyP-hit:focus:active,
+.BracketLeft-hit:focus:active {
+  animation: 1s ease-out keyHitBlack2;
+  animation-iteration-count: 1;
+}
+.KeyW-hit2:focus:active,
+.KeyE-hit2:focus:active,
+.KeyR-hit2:focus:active,
+.KeyY-hit2:focus:active,
+.KeyU-hit2:focus:active,
+.KeyO-hit2:focus:active,
+.KeyP-hit2:focus:active,
+.BracketLeft-hit2:focus:active {
+  animation: 1s ease-out keyHitBlack;
   animation-iteration-count: 1;
 }
