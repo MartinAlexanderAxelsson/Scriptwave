@@ -16,7 +16,7 @@ export default function Keyboard({
     const root = document.documentElement;
     root.style.setProperty('--background-color__keyboard', darkmode ? 'rgb(77, 77, 77)' : 'rgb(151, 191, 201)');
     root.style.setProperty('--background-color__blackkeys', darkmode ? 'rgb(77, 77, 77)' : 'rgb(151, 191, 201)');
-    root.style.setProperty('--border__whitekeys', darkmode ? '2px solid rgb(77, 77, 77)' : '2px solid rgb(151, 191, 201)');
+     root.style.setProperty('--border__whitekeys', darkmode ? '2px solid rgb(77, 77, 77)' : '2px solid rgb(151, 191, 201)');
     root.style.setProperty('--color__keymapping__whitekeys', darkmode ? 'rgb(77, 77, 77)' : 'rgb(151, 191, 201)');
     root.style.setProperty('--background-color__keyHit__whitekeys', darkmode ? 'rgb(251, 176, 59)' : 'rgb(194, 243, 148)');
     root.style.setProperty('--background-color__keyHit2__whitekeys', darkmode ? 'rgb(250, 116, 39)' : 'rgb(255, 219, 99)');

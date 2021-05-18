@@ -108,7 +108,11 @@ $border: none; */
     height: 250px;
     width: 80px;
     background-color: rgb(189, 221, 218);
-    border: var(--border__whitekeys);
+    border-left:  var(--border__whitekeys);
+    border-right:  var(--border__whitekeys);
+    border-bottom:  var(--border__whitekeys);
+    border-top: none;
+  
   }
   .Quote,
   .Quote-hit,
@@ -117,7 +121,10 @@ $border: none; */
     height: 250px;
     width: 80px;
     background-color: rgb(189, 221, 218);
-    border: var(--border__whitekeys);
+    border-left:  var(--border__whitekeys);
+    border-right:  var(--border__whitekeys);
+    border-bottom:  var(--border__whitekeys);
+    border-top: none;
   }
   
   .KeyA-hit,
@@ -143,7 +150,10 @@ $border: none; */
     height: 250px;
     width: 80px;
     background-color: rgb(189, 221, 218);
-    border: var(--border__whitekeys);
+    border-left:  var(--border__whitekeys);
+    border-right:  var(--border__whitekeys);
+    border-bottom:  var(--border__whitekeys);
+    border-top: none;
   }
   .KeyA-hit,
   .KeyS-hit,
@@ -159,7 +169,10 @@ $border: none; */
     height: 250px;
     width: 80px;
     background-color: rgb(189, 221, 218);
-    border: var(--border__whitekeys);
+    border-left:  var(--border__whitekeys);
+    border-right:  var(--border__whitekeys);
+    border-bottom:  var(--border__whitekeys);
+    border-top: none;
     animation: 1s ease-out keyHitWhite;
     animation-iteration-count: 1;
   }
@@ -177,7 +190,10 @@ $border: none; */
     height: 250px;
     width: 80px;
     background-color: rgb(189, 221, 218);
-    border: var(--border__whitekeys);
+    border-left:  var(--border__whitekeys);
+    border-right:  var(--border__whitekeys);
+    border-bottom:  var(--border__whitekeys);
+    border-top: none;
     animation: 1s ease-out keyHitWhite2;
     animation-iteration-count: 1;
   }

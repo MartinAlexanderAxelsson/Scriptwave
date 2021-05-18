@@ -1,0 +1,169 @@
+@mixin octBtn {
+  outline: none;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #1a1a1a;
+  background: #e6e6e6;
+  box-shadow: inset -2px -2px #999999, inset 2px 2px #e6e6e6;
+  background-size: 10px 15px;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+@mixin waveformBtn {
+  outline: none;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #1a1a1a;
+  background: #e6e6e6;
+  box-shadow: inset -2px -2px #999999, inset 2px 2px #e6e6e6;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+
+}
+
+
+.controls {
+  margin: 0;
+  display: flex;
+  background: rgb(158, 155, 149);
+
+  &__volume {
+    &__slider {
+      background: rgb(251, 176, 59);
+      width: 100px;
+      height: 100px;
+      border-radius: 100px;
+      padding: 10px;
+    }
+
+    &__label {
+      font-family: orator-std, monospace;
+      font-weight: 400;
+      font-style: normal;
+      color: rgb(251, 176, 59);
+    }
+    &__octBtn-wrapper {
+      display: flex;
+      &__btnUp {
+        @include octBtn;
+        background-image: url("../images/oct_up.png");
+      }
+      &__btnDown {
+        @include octBtn;
+        background-image: url("../images/oct_down.png");
+      }
+
+      &__btnUp:active,
+      &__btnDown:active {
+        box-shadow: inset 2px 2px #999999, inset -2px -2px #e6e6e6;
+        transform: translateY(0.1px);
+      }
+      &__label {
+        font-family: orator-std, monospace;
+        font-weight: 400;
+        font-style: normal;
+        color: #428cc2;
+      }
+    }
+  }
+  // ---------------------------------------
+
+  &__osc-volume {
+    &__vol-sliders {
+      display: flex;
+      &__osc1-light {
+        // visibility: hidden;
+      }
+      &__osc1 {
+        width: 70px;
+        height: 70px;
+        border-radius: 100px;
+        padding: 7px;
+        background: #428cc2;
+      }
+      &__label-osc1 {
+      }
+      &__osc2-light {
+      }
+      &__osc2 {
+        width: 70px;
+        height: 70px;
+        border-radius: 100px;
+        padding: 7px;
+        background: #428cc2;
+      }
+      &__label-osc2 {
+      }
+    }
+
+    &__waveforms {
+      &__osc1 {
+  
+        //   z-index: 1; set z index with JS for active osc
+        &__sinBtn {
+          @include waveformBtn;
+          background-image: url("../images/sine_wave.png");
+          background-size: 23px 23px;
+     
+        }
+     
+        &__sawBtn {
+          @include waveformBtn;
+          background-image: url("../images/saw_wave.png");
+          background-size: 21px 21px;
+        }
+        
+        &__sqrBtn {
+          @include waveformBtn;
+          background-image: url("../images/square_wave.png");
+          background-size: 23px 23px;
+        }
+      
+        &__triBtn {
+          @include waveformBtn;
+          background-image: url("../images/triangle_wave.png");
+          background-size: 21px 21px;
+        }
+      
+      }
+      &__osc2 {
+     
+        &__sinBtn {
+          @include waveformBtn;
+          background-image: url("../images/sine_wave.png");
+          background-size: 23px 23px;
+        }
+      
+        &__sawBtn {
+          @include waveformBtn;
+          background-image: url("../images/saw_wave.png");
+          background-size: 21px 21px;
+        }
+    
+        &__sqrBtn {
+          @include waveformBtn;
+          background-image: url("../images/square_wave.png");
+          background-size: 23px 23px;
+        }
+       
+        &__triBtn {
+          @include waveformBtn;
+          background-image: url("../images/triangle_wave.png");
+          background-size: 21px 21px;
+        }
+       
+      }
+      &__label-wrapper {
+        display: flex;
+        &__light-osc1 {
+        }
+        &__light-osc2 {
+        }
+        &__label {
+        }
+      }
+    }
+  }
+}

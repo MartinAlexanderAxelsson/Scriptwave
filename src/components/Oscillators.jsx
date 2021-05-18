@@ -326,11 +326,14 @@ export default function Oscillators() {
   }
 
   return (
-    <div>
+    <>
+        <div className="oscillators">
       <Controls
         masterVolSlider={masterVolSlider}
         setMasterVolSlider={setMasterVolSlider}
         waveForms={waveForms}
+        waveFormOsc1={waveFormOsc1}
+        waveFormOsc2={waveFormOsc2}
         setWaveFormOsc1={setWaveFormOsc1}
         setWaveFormOsc2={setWaveFormOsc2}
         osc_1_VolSlider={osc_1_VolSlider}
@@ -377,6 +380,7 @@ export default function Oscillators() {
         whiteNoise={whiteNoise}
         key={key}
       />
-    </div>
+      </div>
+    </>
   )
 }
