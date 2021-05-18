@@ -42,18 +42,24 @@ export default function Controls({
 }) {
   const [knobColor, setKnobColor] = useState("")
 
-const waveformButtonsOpacity ={
+  const waveformButtonsOpacity = {
     sine: 0.5,
     sawtooth: 0.5,
     triangle: 0.5,
     square: 0.5,
   }
-  const [waveformButtonsOpacityOsc1, setWaveformButtonsOpacityOsc1] = useState(waveformButtonsOpacity)
+  const [waveformButtonsOpacityOsc1, setWaveformButtonsOpacityOsc1] = useState(
+    waveformButtonsOpacity
+  )
 
-  const [waveformButtonsOpacityOsc2, setWaveformButtonsOpacityOsc2] = useState(waveformButtonsOpacity)
+  const [waveformButtonsOpacityOsc2, setWaveformButtonsOpacityOsc2] = useState(
+    waveformButtonsOpacity
+  )
 
   const [displayWaveform__osc1, setDisplayWaveform__osc1] = useState("unset")
   const [displayWaveform__osc2, setDisplayWaveform__osc2] = useState("none")
+  const [osc1_light, setOsc1_light] = useState('visible')
+  const [osc2_light, setOsc2_light] = useState('hidden')
 
   function toggleDarkmode() {
     if (darkmode === true) {
@@ -64,15 +70,17 @@ const waveformButtonsOpacity ={
   }
 
   function handleOpacity() {
-    const AllWaveforms = Object.keys(waveformButtonsOpacity).map((waveforms) => {
-      return waveforms
-    })
+    const AllWaveforms = Object.keys(waveformButtonsOpacity).map(
+      (waveforms) => {
+        return waveforms
+      }
+    )
     const nonSelectedWaveformsOsc1 = AllWaveforms.filter(function (waveform) {
       return !waveFormOsc1.includes(waveform)
     })
     const nonSelectedWaveformsOsc2 = AllWaveforms.filter(function (waveform) {
-        return !waveFormOsc2.includes(waveform)
-      })
+      return !waveFormOsc2.includes(waveform)
+    })
     if (waveFormOsc1) {
       setWaveformButtonsOpacityOsc1({
         ...waveformButtonsOpacityOsc1,
@@ -84,14 +92,14 @@ const waveformButtonsOpacity ={
     }
 
     if (waveFormOsc2) {
-        setWaveformButtonsOpacityOsc2({
-          ...waveformButtonsOpacityOsc2,
-          [waveFormOsc2]: 1,
-          [nonSelectedWaveformsOsc2[0]]: 0.5,
-          [nonSelectedWaveformsOsc2[1]]: 0.5,
-          [nonSelectedWaveformsOsc2[2]]: 0.5,
-        })
-      }
+      setWaveformButtonsOpacityOsc2({
+        ...waveformButtonsOpacityOsc2,
+        [waveFormOsc2]: 1,
+        [nonSelectedWaveformsOsc2[0]]: 0.5,
+        [nonSelectedWaveformsOsc2[1]]: 0.5,
+        [nonSelectedWaveformsOsc2[2]]: 0.5,
+      })
+    }
   }
 
   function toggleCheckedKeyMapping() {
@@ -120,22 +128,30 @@ const waveformButtonsOpacity ={
     setOsc_1_VolSlider(osc_1_VolSlider)
     setDisplayWaveform__osc1("unset")
     setDisplayWaveform__osc2("none")
+    setOsc1_light('visible')
+    setOsc2_light('hidden')
   }
 
   const handleOsc_2_Volume = (osc_2_VolSlider) => {
     setOsc_2_VolSlider(osc_2_VolSlider)
     setDisplayWaveform__osc1("none")
     setDisplayWaveform__osc2("unset")
+    setOsc1_light('hidden')
+    setOsc2_light('visible')
   }
 
   function activeOsc1() {
     setDisplayWaveform__osc1("unset")
     setDisplayWaveform__osc2("none")
+    setOsc1_light('visible')
+    setOsc2_light('hidden')
   }
 
   function activeOsc2() {
     setDisplayWaveform__osc1("none")
     setDisplayWaveform__osc2("unset")
+    setOsc1_light('hidden')
+    setOsc2_light('visible')
   }
 
   useEffect(() => {
@@ -199,9 +215,9 @@ const waveformButtonsOpacity ={
         <div className="controls__osc-volume">
           <div className="controls__osc-volume__vol-sliders">
             <div>
-              <div className="controls__osc-volume__vol-sliders__osc1-light">
-                light
-              </div>
+              <div className="controls__osc-volume__vol-sliders__osc1-light"
+                style={{visibility: osc1_light}}  />
+
               <div
                 className="controls__osc-volume__vol-sliders__osc1"
                 onClick={activeOsc1}
@@ -233,9 +249,9 @@ const waveformButtonsOpacity ={
             </div>
 
             <div>
-              <div className="controls__osc-volume__vol-sliders__osc2-light">
-                light
-              </div>
+              <div className="controls__osc-volume__vol-sliders__osc2-light"
+                style={{visibility: osc2_light}} />
+
               <div
                 className="controls__osc-volume__vol-sliders__osc2"
                 onClick={activeOsc2}
@@ -319,15 +335,14 @@ const waveformButtonsOpacity ={
               />
             </div>
             <div className="controls__osc-volume__waveforms__label-wrapper">
-              <div className="controls__osc-volume__waveforms__label-wrapper__light-osc1">
-                light
-              </div>
+              <div className="controls__osc-volume__waveforms__label-wrapper__light-osc1" 
+                style={{visibility: osc1_light}} />
+
               <label className="controls__osc-volume__waveforms__label-wrapper__label">
                 Waveform
               </label>
-              <div className="controls__osc-volume__waveforms__label-wrapper__light-osc2">
-                light
-              </div>
+              <div className="controls__osc-volume__waveforms__label-wrapper__light-osc2"
+              style={{visibility: osc2_light}} />
             </div>
           </div>
         </div>
