@@ -104,7 +104,7 @@ export default function Oscillators() {
   }
   const [waveFormOsc1, setWaveFormOsc1] = useState("sine")
   const [waveFormOsc2, setWaveFormOsc2] = useState("sine")
-  const [filterType, setFilterType] = useState("lowpass")
+  const [selectedFilterType, setSelectedFilterType] = useState("lowpass")
 
   const [masterVolSlider, setMasterVolSlider] = useState(0.5)
   const [osc_1_VolSlider, setOsc_1_VolSlider] = useState(0.5)
@@ -112,7 +112,7 @@ export default function Oscillators() {
   const [osc1DetuneSlider, setOsc1DetuneSlider] = useState(0)
   const [noiseSlider, setNoiseSlider] = useState(0)
 
-  const [filterSlider, setFilterSlider] = useState(2000)
+  const [filterSlider, setFilterSlider] = useState(9200)
   const [envelope_A_Slider, setEnvelope_A_Slider] = useState(0.001)
   const [envelope_D_Slider, setEnvelope_D_Slider] = useState(0.5)
   const [envelope_S_Slider, setEnvelope_S_Slider] = useState(0)
@@ -138,7 +138,7 @@ export default function Oscillators() {
 
   masterVolume.gain.value = masterVolSlider
   filter.q = 5
-  filter.type = filterType
+  filter.type = selectedFilterType
   filter.frequency.value = filterSlider
   delayFeedback.gain.value = delayOnOff
   delay.delayTime.value = delaySlider
@@ -347,7 +347,8 @@ export default function Oscillators() {
         filterSlider={filterSlider}
         setFilterSlider={setFilterSlider}
         filterTypes={filterTypes}
-        setFilterType={setFilterType}
+        selectedFilterType={selectedFilterType}
+        setSelectedFilterType={setSelectedFilterType}
         envelope_A_Slider={envelope_A_Slider}
         setEnvelope_A_Slider={setEnvelope_A_Slider}
         envelope_D_Slider={envelope_D_Slider}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import "./controls.scss"
+import "./controls.css"
 import { CircleSlider } from "react-circle-slider"
 export default function Controls({
   masterVolSlider,
@@ -20,7 +21,8 @@ export default function Controls({
   filterSlider,
   setFilterSlider,
   filterTypes,
-  setFilterType,
+  selectedFilterType,
+  setSelectedFilterType,
   envelope_A_Slider,
   setEnvelope_A_Slider,
   envelope_D_Slider,
@@ -40,7 +42,15 @@ export default function Controls({
   darkmode,
   setDarkmode,
 }) {
+  const root = document.documentElement
+  root.style.setProperty(
+    "--color__darkmode",
+    darkmode ? "rgb(77, 77, 77)" : "rgb(151, 191, 201)"
+  )
+
   const [knobColor, setKnobColor] = useState("")
+  const [noiseSliderColor, setNoiseSliderColor] = useState("#79c6c3")
+  const [backgroundColor, setBackgroundColor] = useState("rgb(77, 77, 77)")
 
   const waveformButtonsOpacity = {
     sine: 0.5,
@@ -56,20 +66,30 @@ export default function Controls({
     waveformButtonsOpacity
   )
 
+  const [filtertypeColor, setFiltertypeColor] = useState({
+    lowpass: "#ffffff",
+    bandpass: "#ffffff",
+    highpass: "#ffffff",
+  })
+
   const [displayWaveform__osc1, setDisplayWaveform__osc1] = useState("unset")
   const [displayWaveform__osc2, setDisplayWaveform__osc2] = useState("none")
-  const [osc1_light, setOsc1_light] = useState('visible')
-  const [osc2_light, setOsc2_light] = useState('hidden')
+  const [osc1_light, setOsc1_light] = useState("visible")
+  const [osc2_light, setOsc2_light] = useState("hidden")
 
   function toggleDarkmode() {
     if (darkmode === true) {
       setKnobColor("rgb(77, 77, 77)")
+      setBackgroundColor("rgb(77, 77, 77)")
+      setNoiseSliderColor("#79c6c3")
     } else {
       setKnobColor("rgb(151, 191, 201)")
+      setBackgroundColor("rgb(151, 191, 201)")
+      setNoiseSliderColor("#666666")
     }
   }
 
-  function handleOpacity() {
+  function waveformButton__OpacityChange() {
     const AllWaveforms = Object.keys(waveformButtonsOpacity).map(
       (waveforms) => {
         return waveforms
@@ -102,6 +122,24 @@ export default function Controls({
     }
   }
 
+  function filtertype__ColorChange() {
+    const AllFilterTypes = Object.keys(filtertypeColor).map((color) => {
+      return color
+    })
+    const nonSelectedFilterType = AllFilterTypes.filter(function (color) {
+      return !selectedFilterType.includes(color)
+    })
+
+    if (selectedFilterType) {
+      setFiltertypeColor({
+        ...filtertypeColor,
+        [selectedFilterType]: "#1a1a1a",
+        [nonSelectedFilterType[0]]: "#ffffff",
+        [nonSelectedFilterType[1]]: "#ffffff",
+      })
+    }
+  }
+
   function toggleCheckedKeyMapping() {
     if (keyMapping.white === "key-mapping__hidden") {
       setKeyMapping({
@@ -128,30 +166,46 @@ export default function Controls({
     setOsc_1_VolSlider(osc_1_VolSlider)
     setDisplayWaveform__osc1("unset")
     setDisplayWaveform__osc2("none")
-    setOsc1_light('visible')
-    setOsc2_light('hidden')
+    setOsc1_light("visible")
+    setOsc2_light("hidden")
   }
 
   const handleOsc_2_Volume = (osc_2_VolSlider) => {
     setOsc_2_VolSlider(osc_2_VolSlider)
     setDisplayWaveform__osc1("none")
     setDisplayWaveform__osc2("unset")
-    setOsc1_light('hidden')
-    setOsc2_light('visible')
+    setOsc1_light("hidden")
+    setOsc2_light("visible")
+  }
+
+  const handleDetune = (osc1DetuneSlider) => {
+    setOsc1DetuneSlider(osc1DetuneSlider)
+  }
+
+  const handleNoise_volume = (noiseSlider) => {
+    setNoiseSlider(noiseSlider)
+  }
+
+  const handleFilter = (filterSlider) => {
+    setFilterSlider(filterSlider)
+  }
+
+  const handleDelay = (delaySlider) => {
+    setDelaySlider(delaySlider)
   }
 
   function activeOsc1() {
     setDisplayWaveform__osc1("unset")
     setDisplayWaveform__osc2("none")
-    setOsc1_light('visible')
-    setOsc2_light('hidden')
+    setOsc1_light("visible")
+    setOsc2_light("hidden")
   }
 
   function activeOsc2() {
     setDisplayWaveform__osc1("none")
     setDisplayWaveform__osc2("unset")
-    setOsc1_light('hidden')
-    setOsc2_light('visible')
+    setOsc1_light("hidden")
+    setOsc2_light("visible")
   }
 
   useEffect(() => {
@@ -165,12 +219,13 @@ export default function Controls({
   }, [delaySlider, toggleDarkmode])
 
   useEffect(() => {
-    handleOpacity()
-  }, [waveFormOsc1, waveFormOsc2])
+    waveformButton__OpacityChange()
+    filtertype__ColorChange()
+  }, [waveFormOsc1, waveFormOsc2, selectedFilterType])
 
   return (
     <>
-      <div className="controls">
+      <div className="controls" style={{ background: backgroundColor }}>
         <div className="controls__volume">
           <div className="controls__volume__slider">
             <CircleSlider
@@ -180,17 +235,16 @@ export default function Controls({
               knobColor={knobColor}
               showTooltip={true}
               showPercentage={false}
-              progressColor="#FDB11B"
+              progressColor="#f7931e"
               knobRadius={8}
               min={0}
               max={1}
               stepSize={0.1}
-              circleColor="#ff5722"
+              circleColor="#f7931e;"
               tooltipSize={1}
               tooltipColor="#ff5722"
               circleWidth={0}
               progressWidth={10}
-              circleColor="#ff5722"
               onChange={handleMasterVolume}
             />
           </div>
@@ -215,8 +269,10 @@ export default function Controls({
         <div className="controls__osc-volume">
           <div className="controls__osc-volume__vol-sliders">
             <div>
-              <div className="controls__osc-volume__vol-sliders__osc1-light"
-                style={{visibility: osc1_light}}  />
+              <div
+                className="controls__osc-volume__vol-sliders__osc1-light"
+                style={{ visibility: osc1_light }}
+              />
 
               <div
                 className="controls__osc-volume__vol-sliders__osc1"
@@ -244,13 +300,15 @@ export default function Controls({
                 />
               </div>
               <label className="controls__osc-volume__vol-sliders__label-osc1">
-                Osc1
+                Osc
               </label>
             </div>
 
             <div>
-              <div className="controls__osc-volume__vol-sliders__osc2-light"
-                style={{visibility: osc2_light}} />
+              <div
+                className="controls__osc-volume__vol-sliders__osc2-light"
+                style={{ visibility: osc2_light }}
+              />
 
               <div
                 className="controls__osc-volume__vol-sliders__osc2"
@@ -278,7 +336,7 @@ export default function Controls({
                 />
               </div>
               <label className="controls__osc-volume__vol-sliders__label-osc2">
-                Osc2
+                Osc
               </label>
             </div>
           </div>
@@ -335,126 +393,254 @@ export default function Controls({
               />
             </div>
             <div className="controls__osc-volume__waveforms__label-wrapper">
-              <div className="controls__osc-volume__waveforms__label-wrapper__light-osc1" 
-                style={{visibility: osc1_light}} />
+              <div
+                className="controls__osc-volume__waveforms__label-wrapper__light-osc1"
+                style={{ visibility: osc1_light }}
+              />
 
               <label className="controls__osc-volume__waveforms__label-wrapper__label">
                 Waveform
               </label>
-              <div className="controls__osc-volume__waveforms__label-wrapper__light-osc2"
-              style={{visibility: osc2_light}} />
+              <div
+                className="controls__osc-volume__waveforms__label-wrapper__light-osc2"
+                style={{ visibility: osc2_light }}
+              />
             </div>
           </div>
         </div>
 
-        <div>
-          <input
-            onChange={(e) => setOsc1DetuneSlider(e.target.value)}
-            type="range"
-            min="-1000"
-            max="1000"
-            defaultValue={osc1DetuneSlider}
-            step="1"
-          ></input>
-          <label>Detune</label>
-          <input
-            onChange={(e) => setNoiseSlider(e.target.value)}
-            type="range"
-            min="0"
-            max="2"
-            defaultValue={noiseSlider}
-            step="0.1"
-          ></input>
-          <label>Noise</label>
-        </div>
-        <div>
-          <div>LOGO</div>
-          <div>
-            <button onClick={(e) => setFilterType(filterTypes.lowpass)}>
-              low
-            </button>
-            <button onClick={(e) => setFilterType(filterTypes.bandpass)}>
-              band
-            </button>
-            <button onClick={(e) => setFilterType(filterTypes.highpass)}>
-              high
-            </button>
+        <div className="controls__detune_and_noise">
+          <div className="controls__detune-and-noise__detune-slider">
+            <CircleSlider
+              value={osc1DetuneSlider}
+              size={70}
+              shadow={false}
+              knobColor={knobColor}
+              showTooltip={true}
+              showPercentage={false}
+              progressColor="#428cc2"
+              knobRadius={6}
+              min={-100}
+              max={100}
+              stepSize={1}
+              circleColor="#ff5722"
+              tooltipSize={1}
+              tooltipColor="#ff5722"
+              circleWidth={0}
+              progressWidth={10}
+              circleColor="#ff5722"
+              onChange={handleDetune}
+            />
           </div>
-          <input
-            onChange={(e) => setFilterSlider(e.target.value)}
-            type="range"
-            min="0"
-            max="1000"
-            defaultValue={filterSlider}
-            step="10"
-          ></input>
-          <label>Filter</label>
-        </div>
-        <div>
-          <input
-            onChange={(e) => setEnvelope_A_Slider(e.target.value)}
-            type="range"
-            min="0.01"
-            max="1"
-            defaultValue={envelope_A_Slider}
-            step="0.1"
-          ></input>
-          <label>A</label>
-          <input
-            onChange={(e) => setEnvelope_D_Slider(e.target.value)}
-            type="range"
-            min="0"
-            max="4"
-            defaultValue={envelope_D_Slider}
-            step="0.1"
-          ></input>
-          <label>D</label>
-          <input
-            onChange={(e) => setEnvelope_S_Slider(e.target.value)}
-            type="range"
-            min="0"
-            max="1"
-            defaultValue={envelope_S_Slider}
-            step="0.1"
-          ></input>
-          <label>S</label>
-          <input
-            onChange={(e) => setEnvelope_R_Slider(e.target.value)}
-            type="range"
-            min="1"
-            max="5"
-            defaultValue={envelope_R_Slider}
-            step="0.1"
-          ></input>
-          <label>R</label>
+          <label className="controls__detune-and-noise__detune-label">
+            Detune
+          </label>
+          <div
+            className="controls__detune-and-noise__noise-slider"
+            style={{ background: noiseSliderColor }}
+          >
+            <CircleSlider
+              value={noiseSlider}
+              size={70}
+              shadow={false}
+              knobColor={knobColor}
+              showTooltip={true}
+              showPercentage={false}
+              progressColor="#79c6c3"
+              knobRadius={6}
+              min={0}
+              max={1}
+              stepSize={0.1}
+              circleColor="#ff5722"
+              tooltipSize={1}
+              tooltipColor="#ff5722"
+              circleWidth={0}
+              progressWidth={10}
+              circleColor="#ff5722"
+              onChange={handleNoise_volume}
+            />
+          </div>
+
+          <label
+            className="controls__detune-and-noise__noise-label"
+            style={{ color: noiseSliderColor }}
+          >
+            Noise
+          </label>
         </div>
 
-        <div>
-          <input
+        <div className="controls__filter">
+          <div className="controls__filter__logo">LOGO</div>
+          <div className="controls__filter__filtertype">
+            <button
+              className="controls__filter__filtertype__lowpass"
+              onClick={(e) => setSelectedFilterType(filterTypes.lowpass)}
+              style={{ background: filtertypeColor.lowpass }}
+            />
+            <label className="controls__filter__filtertype__lowpass-label">
+              Lp
+            </label>
+            <button
+              className="controls__filter__filtertype__bandpass"
+              onClick={(e) => setSelectedFilterType(filterTypes.bandpass)}
+              style={{ background: filtertypeColor.bandpass }}
+            />
+            <label className="controls__filter__filtertype__bandpass-label">
+              Bp
+            </label>
+            <button
+              className="controls__filter__filtertype__highpass"
+              onClick={(e) => setSelectedFilterType(filterTypes.highpass)}
+              style={{ background: filtertypeColor.highpass }}
+            />
+            <label className="controls__filter__filtertype__highpass-label">
+              Hp
+            </label>
+          </div>
+
+          <div className="controls__filter__filter-slider">
+            <CircleSlider
+              value={filterSlider}
+              size={100}
+              shadow={false}
+              knobColor={knobColor}
+              showTooltip={true}
+              showPercentage={false}
+              progressColor="#1a1a1a"
+              knobRadius={10}
+              min={0}
+              max={10000}
+              stepSize={0.1}
+              circleColor="#ff5722"
+              tooltipSize={1}
+              tooltipColor="#ff5722"
+              circleWidth={0}
+              progressWidth={10}
+              circleColor="#ff5722"
+              onChange={handleFilter}
+            />
+          </div>
+          <label className="controls__filter__label">Filter</label>
+        </div>
+
+        <div className="controls__adsr">
+          <div>
+            <div className="controls__adsr__attack-wrapper">
+              <input
+                className="controls__adsr__attack-wrapper__slider"
+                onChange={(e) => setEnvelope_A_Slider(e.target.value)}
+                type="range"
+                min="0.01"
+                max="1"
+                defaultValue={envelope_A_Slider}
+                step="0.1"
+              ></input>
+            </div>
+            <label className="controls__adsr__attack-label">A</label>
+          </div>
+          <div>
+            <div className="controls__adsr__decay-wrapper">
+              <input
+                onChange={(e) => setEnvelope_D_Slider(e.target.value)}
+                type="range"
+                min="0"
+                max="4"
+                defaultValue={envelope_D_Slider}
+                step="0.1"
+              ></input>
+            </div>
+            <label className="controls__adsr__decay-label">D</label>
+          </div>
+
+          <div>
+            <div className="controls__adsr__sustain-wrapper">
+              <input
+                onChange={(e) => setEnvelope_S_Slider(e.target.value)}
+                type="range"
+                min="0"
+                max="1"
+                defaultValue={envelope_S_Slider}
+                step="0.1"
+              ></input>
+            </div>
+            <label className="controls__adsr__sustain-label">S</label>
+          </div>
+
+          <div>
+            <div className="controls__adsr__release-wrapper">
+              <input
+                onChange={(e) => setEnvelope_R_Slider(e.target.value)}
+                type="range"
+                min="1"
+                max="5"
+                defaultValue={envelope_R_Slider}
+                step="0.1"
+              ></input>
+            </div>
+            <label className="controls__adsr__release-label">R</label>
+          </div>
+        </div>
+
+        <div className="controls__delay">
+          <div>
+            <div className="controls__delay__slider">
+              <CircleSlider
+                value={delaySlider}
+                size={70}
+                shadow={false}
+                knobColor={knobColor}
+                showTooltip={true}
+                showPercentage={false}
+                progressColor="#f7931e"
+                knobRadius={6}
+                min={0}
+                max={1}
+                stepSize={0.1}
+                circleColor="#ff5722"
+                tooltipSize={1}
+                tooltipColor="#ff5722"
+                circleWidth={0}
+                progressWidth={10}
+                circleColor="#ff5722"
+                onChange={handleDelay}
+              />
+            </div>
+            <label className="controls__delay__label">Delay</label>
+          </div>
+          {/* <input
             onChange={(e) => setDelaySlider(e.target.value)}
             type="range"
             min="0"
             max="0.4"
             defaultValue={delaySlider}
             step="0.01"
-          ></input>
-          <label>Delay</label>
-          <input
-            type="checkbox"
-            name="mapping"
-            value={1}
-            defaultChecked={keyMapping}
-            onChange={toggleCheckedKeyMapping}
-          />
-          <label>Mapping</label>
-          <input
-            type="checkbox"
-            name="mapping"
-            value={1}
-            defaultChecked={darkmode}
-            onChange={toggleCheckedDarkmode}
-          />
-          <label>Darkmode</label>
+          ></input> */}
+          <div className="controls__delay__switches">
+            <label className="controls__delay__switches__keymapping">
+              <input
+                type="checkbox"
+                value={1}
+                defaultChecked={keyMapping}
+                onChange={toggleCheckedKeyMapping}
+              />
+              <div className="controls__delay__switches__keymapping-slider"></div>
+            </label>
+            <label className="controls__delay__switches__keymapping-label">
+              Mapping
+            </label>
+            <label className="controls__delay__switches__darkmode">
+              <input
+                type="checkbox"
+                value={1}
+                defaultChecked={darkmode}
+                onChange={toggleCheckedDarkmode}
+              />
+              <div className="controls__delay__switches__darkmode-slider"></div>
+            </label>
+            <label className="controls__delay__switches__darkmode-label">
+              Darkmode
+            </label>
+          </div>
         </div>
       </div>
     </>
