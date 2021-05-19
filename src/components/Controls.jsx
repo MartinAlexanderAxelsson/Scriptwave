@@ -35,6 +35,8 @@ export default function Controls({
   setEnvelope_R_Slider,
   delaySlider,
   setDelaySlider,
+  delayFeedbackSlider,
+  setDelayFeedbackSlider,
   //delayOnOff,
   setDelayOnOff,
   octaveUp,
@@ -196,6 +198,10 @@ export default function Controls({
     setDelaySlider(delaySlider)
   }
 
+  const handleDelayFeedback = (delayFeedbackSlider) => {
+    setDelayFeedbackSlider(delayFeedbackSlider)
+  }
+
   function activeOsc1() {
     setDisplayWaveform__osc1("unset")
     setDisplayWaveform__osc2("none")
@@ -209,14 +215,16 @@ export default function Controls({
     setOsc1_light("hidden")
     setOsc2_light("visible")
   }
-
+console.log(delaySlider)
   useEffect(() => {
     toggleDarkmode()
 
     if (delaySlider == 0) {
-      setDelayOnOff(0)
+    //   setDelayOnOff(0)
+      setDelayFeedbackSlider(0)
+    //disable delay or feedback
     } else {
-      setDelayOnOff(0.2)
+    //   setDelayOnOff(0.2)
     }
   }, [delaySlider, toggleDarkmode])
 
@@ -596,17 +604,22 @@ export default function Controls({
             <label className="controls__delay__MIDI__label">MIDI</label>
             <div className="controls__delay__MIDI__light"></div>
           </div>
+          <div className="controls__delay__headline">Delay</div>
+          <div className="controls__delay__sliders">
+         
           <div>
-            <div className="controls__delay__slider">
+            
+             
+            <div className="controls__delay__sliders__slider-time">
               <CircleSlider
                 value={delaySlider}
-                size={50}
+                size={45}
                 shadow={false}
                 knobColor={knobColor}
                 showTooltip={true}
                 showPercentage={false}
-                progressColor="#f7931e"
-                knobRadius={5}
+                progressColor="#d8d6d6"
+                knobRadius={4.5}
                 min={0}
                 max={1}
                 stepSize={0.1}
@@ -616,19 +629,38 @@ export default function Controls({
                 circleWidth={0}
                 progressWidth={10}
                 circleColor="#ff5722"
+              
                 onChange={handleDelay}
               />
             </div>
-            <label className="controls__delay__label">Delay</label>
+            <label className="controls__delay__sliders__label-time">Time</label>
           </div>
-          {/* <input
-            onChange={(e) => setDelaySlider(e.target.value)}
-            type="range"
-            min="0"
-            max="0.4"
-            defaultValue={delaySlider}
-            step="0.01"
-          ></input> */}
+          <div>
+            <div className="controls__delay__sliders__slider-repeat">
+              <CircleSlider
+                value={delayFeedbackSlider}
+                size={45}
+                shadow={false}
+                knobColor={knobColor}
+                showTooltip={true}
+                showPercentage={false}
+                progressColor="#d8d6d6"
+                knobRadius={4.5}
+                min={0}
+                max={0.9}
+                stepSize={0.1}
+                circleColor="#ff5722"
+                tooltipSize={1}
+                tooltipColor="#ff5722"
+                circleWidth={0}
+                progressWidth={10}
+                circleColor="#ff5722"
+                onChange={handleDelayFeedback}
+              />
+            </div>
+            <label className="controls__delay__sliders__label-repeat">Repeat</label>
+          </div>
+          </div>
           <div className="controls__delay__switches">
             <div>
               <label className="controls__delay__switches__keymapping">

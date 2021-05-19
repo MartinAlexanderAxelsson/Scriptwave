@@ -118,6 +118,7 @@ export default function Oscillators() {
   const [envelope_S_Slider, setEnvelope_S_Slider] = useState(0)
   const [envelope_R_Slider, setEnvelope_R_Slider] = useState(1)
   const [delaySlider, setDelaySlider] = useState(0)
+  const [delayFeedbackSlider, setDelayFeedbackSlider] = useState(0)
   const [delayOnOff, setDelayOnOff] = useState(0)
 
   const [darkmode, setDarkmode] = useState(true)
@@ -157,7 +158,8 @@ export default function Oscillators() {
   filter.q = 5
   filter.type = selectedFilterType
   filter.frequency.value = filterSlider
-  delayFeedback.gain.value = delayOnOff
+  //   delayFeedback.gain.value = delayOnOff
+  delayFeedback.gain.value = delayFeedbackSlider
   delay.delayTime.value = delaySlider
 
   osc_1_Volume.gain.value = osc_1_VolSlider
@@ -313,8 +315,8 @@ export default function Oscillators() {
     )
 
     noise.start(audio.currentTime)
-    noiseVolume.gain.value = noiseSlider
 
+    noiseVolume.gain.value = noiseSlider
     let noiseFilterLow = audio.createBiquadFilter()
     let noiseFilterHigh = audio.createBiquadFilter()
     noiseFilterLow.type = "lowpass"
@@ -324,13 +326,13 @@ export default function Oscillators() {
 
     // delay.connect(delayFeedback)
     // delayFeedback.connect(delay)
-    noiseVolume.connect(delay)
+    // noiseVolume.connect(delay)
     noise.connect(envelope)
     envelope.connect(noiseFilterHigh)
     noiseFilterHigh.connect(noiseFilterLow)
     noiseFilterLow.connect(noiseVolume)
-    noiseVolume.connect(masterVolume)
-
+    noiseVolume.connect(filter)
+    filter.connect(masterVolume)
     masterVolume.connect(audio.destination)
 
     noise.stop(
@@ -383,6 +385,8 @@ export default function Oscillators() {
             setEnvelope_R_Slider={setEnvelope_R_Slider}
             delaySlider={delaySlider}
             setDelaySlider={setDelaySlider}
+            delayFeedbackSlider={delayFeedbackSlider}
+            setDelayFeedbackSlider={setDelayFeedbackSlider}
             //delayOnOff={delayOnOff}
             setDelayOnOff={setDelayOnOff}
             octaveUp={octaveUp}

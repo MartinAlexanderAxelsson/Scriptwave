@@ -288,10 +288,10 @@
     justify-content: flex-end;
     text-align: center;
     width: 80px;
-   
+
     &__logo {
-        margin-left: -25px;
-        margin-top: -30px;
+      margin-left: -25px;
+      margin-top: -30px;
       &-img {
         width: 130px;
       }
@@ -449,23 +449,58 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-
-    margin-left: -12px;
-
-    &__slider {
-      margin-top: 12px;
-      margin-bottom: 5px;
-      width: 50px;
-      height: 50px;
-      border-radius: 100px;
-      padding: 5px;
-      background: #f7931e;
+    margin-left: -25px;
+    margin-right: 8px;
+    &__headline {
+        font-weight: 900;
+        font-style: normal;
+        font-size: 18px;
+        color: #d8d6d6;
+        margin-bottom:8px;
+        margin-right: 7px;
     }
-    &__label {
-      font-weight: 900;
-      font-style: normal;
-      font-size: 18px;
-      color: #f7931e;
+    &__sliders {
+
+        display: flex;
+   
+      justify-content: space-between;
+
+width:150px;
+ margin-right: 7px;
+ margin-top: 2px;
+      &__slider-time {
+          
+        // margin-top: 12px;
+        // margin-bottom: 5px;
+        width: 45px;
+        height: 45px;
+        border-radius: 100px;
+        padding: 5px;
+        background: #d8d6d6;
+      }
+      &__label-time {
+       
+        font-weight: 900;
+        font-style: normal;
+        font-size: 14px;
+        color: #d8d6d6;
+      }
+      &__slider-repeat {
+        // margin-top: 12px;
+        // margin-bottom: 5px;
+        width: 45px;
+        height: 45px;
+        border-radius: 100px;
+        padding: 5px;
+        background: #d8d6d6;
+      }
+      &__label-repeat {
+    
+        font-weight: 900;
+        font-style: normal;
+        font-size: 14px;
+        color: #d8d6d6;
+      }
     }
     &__MIDI {
       display: flex;
@@ -473,7 +508,8 @@
       align-items: center;
       justify-content: space-between;
       width: 65px;
-      margin-left: 110px;
+      margin-right: -145px;
+      margin-top:-10px;
       &__light {
         width: 15px;
         height: 15px;
