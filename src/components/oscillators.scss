@@ -1,4 +1,17 @@
+
+
+.oscillators-wrapper {
+  display: flex;
+  background: #1a1a1a;
+  justify-content: center;
+}
+
 .oscillators {
-    margin:0;
-    background: greenyellow;
+  margin-top: 60px;
+  margin-bottom: 400px;
+  background: rgb(77, 77, 77);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
 }

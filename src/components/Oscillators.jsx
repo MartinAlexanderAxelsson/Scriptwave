@@ -122,9 +122,26 @@ export default function Oscillators() {
 
   const [darkmode, setDarkmode] = useState(true)
   const [keyMapping, setKeyMapping] = useState({
-      white: "key-mapping",
-      black: "key-mapping__black"
+    white: "key-mapping",
+    black: "key-mapping__black",
   })
+
+  const [mainBackgroundColor, setMainBackgroundColor] = useState("#1a1a1a")
+  const [synthBackgroundColor, setsynthBackgroundColor] =
+    useState("rgb(77, 77, 77)")
+  function toggleDarkmode() {
+    if (darkmode === true) {
+      setMainBackgroundColor("#1a1a1a")
+      setsynthBackgroundColor("rgb(77, 77, 77)")
+    } else {
+      setMainBackgroundColor("#bdddda")
+      setsynthBackgroundColor("#97bfc9")
+    }
+  }
+
+  useEffect(() => {
+    toggleDarkmode()
+  }, [toggleDarkmode])
 
   let note
   let masterVolume = audio.createGain()
@@ -327,60 +344,66 @@ export default function Oscillators() {
 
   return (
     <>
-        <div className="oscillators">
-      <Controls
-        masterVolSlider={masterVolSlider}
-        setMasterVolSlider={setMasterVolSlider}
-        waveForms={waveForms}
-        waveFormOsc1={waveFormOsc1}
-        waveFormOsc2={waveFormOsc2}
-        setWaveFormOsc1={setWaveFormOsc1}
-        setWaveFormOsc2={setWaveFormOsc2}
-        osc_1_VolSlider={osc_1_VolSlider}
-        setOsc_1_VolSlider={setOsc_1_VolSlider}
-        osc_2_VolSlider={osc_2_VolSlider}
-        setOsc_2_VolSlider={setOsc_2_VolSlider}
-        osc1DetuneSlider={osc1DetuneSlider}
-        setOsc1DetuneSlider={setOsc1DetuneSlider}
-        noiseSlider={noiseSlider}
-        setNoiseSlider={setNoiseSlider}
-        filterSlider={filterSlider}
-        setFilterSlider={setFilterSlider}
-        filterTypes={filterTypes}
-        selectedFilterType={selectedFilterType}
-        setSelectedFilterType={setSelectedFilterType}
-        envelope_A_Slider={envelope_A_Slider}
-        setEnvelope_A_Slider={setEnvelope_A_Slider}
-        envelope_D_Slider={envelope_D_Slider}
-        setEnvelope_D_Slider={setEnvelope_D_Slider}
-        envelope_S_Slider={envelope_S_Slider}
-        setEnvelope_S_Slider={setEnvelope_S_Slider}
-        envelope_R_Slider={envelope_R_Slider}
-        setEnvelope_R_Slider={setEnvelope_R_Slider}
-        delaySlider={delaySlider}
-        setDelaySlider={setDelaySlider}
-        //delayOnOff={delayOnOff}
-        setDelayOnOff={setDelayOnOff}
-        octaveUp={octaveUp}
-        octaveDown={octaveDown}
-        keyMapping={keyMapping}
-    
-    
-        setKeyMapping={setKeyMapping}
-        darkmode={darkmode}
-        setDarkmode={setDarkmode}
-      />
-      <Keyboard
-        keyMapping={keyMapping}
-        darkmode={darkmode}
-        notes={notes}
-        //delayOnOff={delayOnOff}
-        waveForms={waveForms}
-        oscillator_1={oscillator_1}
-        oscillator_2={oscillator_2}
-        whiteNoise={whiteNoise}
-        key={key}
-      />
+      <div
+        className="oscillators-wrapper"
+        style={{ background: mainBackgroundColor }}
+      >
+        <div
+          className="oscillators"
+          style={{ background: synthBackgroundColor }}
+        >
+          <Controls
+            masterVolSlider={masterVolSlider}
+            setMasterVolSlider={setMasterVolSlider}
+            waveForms={waveForms}
+            waveFormOsc1={waveFormOsc1}
+            waveFormOsc2={waveFormOsc2}
+            setWaveFormOsc1={setWaveFormOsc1}
+            setWaveFormOsc2={setWaveFormOsc2}
+            osc_1_VolSlider={osc_1_VolSlider}
+            setOsc_1_VolSlider={setOsc_1_VolSlider}
+            osc_2_VolSlider={osc_2_VolSlider}
+            setOsc_2_VolSlider={setOsc_2_VolSlider}
+            osc1DetuneSlider={osc1DetuneSlider}
+            setOsc1DetuneSlider={setOsc1DetuneSlider}
+            noiseSlider={noiseSlider}
+            setNoiseSlider={setNoiseSlider}
+            filterSlider={filterSlider}
+            setFilterSlider={setFilterSlider}
+            filterTypes={filterTypes}
+            selectedFilterType={selectedFilterType}
+            setSelectedFilterType={setSelectedFilterType}
+            envelope_A_Slider={envelope_A_Slider}
+            setEnvelope_A_Slider={setEnvelope_A_Slider}
+            envelope_D_Slider={envelope_D_Slider}
+            setEnvelope_D_Slider={setEnvelope_D_Slider}
+            envelope_S_Slider={envelope_S_Slider}
+            setEnvelope_S_Slider={setEnvelope_S_Slider}
+            envelope_R_Slider={envelope_R_Slider}
+            setEnvelope_R_Slider={setEnvelope_R_Slider}
+            delaySlider={delaySlider}
+            setDelaySlider={setDelaySlider}
+            //delayOnOff={delayOnOff}
+            setDelayOnOff={setDelayOnOff}
+            octaveUp={octaveUp}
+            octaveDown={octaveDown}
+            keyMapping={keyMapping}
+            setKeyMapping={setKeyMapping}
+            darkmode={darkmode}
+            setDarkmode={setDarkmode}
+          />
+          <Keyboard
+            keyMapping={keyMapping}
+            darkmode={darkmode}
+            notes={notes}
+            //delayOnOff={delayOnOff}
+            waveForms={waveForms}
+            oscillator_1={oscillator_1}
+            oscillator_2={oscillator_2}
+            whiteNoise={whiteNoise}
+            key={key}
+          />
+        </div>
       </div>
     </>
   )

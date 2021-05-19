@@ -1,4 +1,4 @@
-
+import React from 'react'
 import Oscillators from './components/Oscillators';
 
 function App() {

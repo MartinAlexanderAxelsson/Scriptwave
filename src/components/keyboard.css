@@ -6,7 +6,7 @@ $border: none; */
 :root {
     --background-color__keyboard: rgb(77, 77, 77);
     --background-color__blackkeys: rgb(77, 77, 77);
-    --border__whitekeys: 2px solid rgb(77, 77, 77);
+    --border__whitekeys: 3px solid rgb(77, 77, 77);
     --color__keymapping__whitekeys: rgb(77, 77, 77);
     --background-color__keyHit__whitekeys: rgb(251, 176, 59);
   
@@ -14,11 +14,14 @@ $border: none; */
   
   }
  
+
 .keyboard {
-  margin: 0;
+  margin-right: 51px;
   display: flex;
   flex-direction: row;
+ 
   justify-content: center;
+
   background: var(--background-color__keyboard);
 
 }
@@ -106,7 +109,7 @@ $border: none; */
   .KeyA-hit2 {
     border-radius: 0px 0px 0px 20px;
     height: 250px;
-    width: 80px;
+    width: 90px;
     background-color: rgb(189, 221, 218);
     border-left:  var(--border__whitekeys);
     border-right:  var(--border__whitekeys);
@@ -119,7 +122,7 @@ $border: none; */
   .Quote-hit2 {
     border-radius: 0px 0px 20px 0px;
     height: 250px;
-    width: 80px;
+    width: 90px;
     background-color: rgb(189, 221, 218);
     border-left:  var(--border__whitekeys);
     border-right:  var(--border__whitekeys);
@@ -148,7 +151,7 @@ $border: none; */
   .KeyL,
   .Semicolon {
     height: 250px;
-    width: 80px;
+    width: 90px;
     background-color: rgb(189, 221, 218);
     border-left:  var(--border__whitekeys);
     border-right:  var(--border__whitekeys);
@@ -167,7 +170,7 @@ $border: none; */
   .Semicolon-hit,
   .Quote-hit {
     height: 250px;
-    width: 80px;
+    width: 90px;
     background-color: rgb(189, 221, 218);
     border-left:  var(--border__whitekeys);
     border-right:  var(--border__whitekeys);
@@ -188,7 +191,7 @@ $border: none; */
   .Semicolon-hit2,
   .Quote-hit2 {
     height: 250px;
-    width: 80px;
+    width: 90px;
     background-color: rgb(189, 221, 218);
     border-left:  var(--border__whitekeys);
     border-right:  var(--border__whitekeys);
@@ -251,9 +254,9 @@ $border: none; */
   .KeyW-hit,
   .KeyW-hit2 {
     z-index: 1;
-    margin: 0px 1px 10px -834px;
+    margin: 0px 1px 10px -938px;
     height: 180px;
-    width: 65px;
+    width: 75px;
     background: var(--background-color__blackkeys);
     border-radius: 0px 0px 100px 100px;
     border: none;
@@ -284,7 +287,7 @@ $border: none; */
     z-index: 1;
     margin: 0px 0px 0px 15px;
     height: 180px;
-    width: 65px;
+    width: 75px;
     background: var(--background-color__blackkeys);
     border-radius: 0px 0px 100px 100px;
     border: none;
@@ -297,9 +300,9 @@ $border: none; */
   .KeyY-hit2,
   .KeyO-hit2 {
     z-index: 1;
-    margin: 0px 0px 0px 95px;
+    margin: 0px 0px 0px 105px;
     height: 180px;
-    width: 65px;
+    width: 75px;
     background: var(--background-color__blackkeys);
     border-radius: 0px 0px 100px 100px;
     border: none;

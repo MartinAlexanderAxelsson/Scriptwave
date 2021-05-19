@@ -230,13 +230,13 @@ export default function Controls({
           <div className="controls__volume__slider">
             <CircleSlider
               value={masterVolSlider}
-              size={100}
+              size={70}
               shadow={false}
               knobColor={knobColor}
               showTooltip={true}
               showPercentage={false}
               progressColor="#f7931e"
-              knobRadius={8}
+              knobRadius={7}
               min={0}
               max={1}
               stepSize={0.1}
@@ -268,25 +268,25 @@ export default function Controls({
 
         <div className="controls__osc-volume">
           <div className="controls__osc-volume__vol-sliders">
-            <div>
+            <div className="controls__osc-volume__vol-sliders__osc1">
               <div
                 className="controls__osc-volume__vol-sliders__osc1-light"
                 style={{ visibility: osc1_light }}
               />
 
               <div
-                className="controls__osc-volume__vol-sliders__osc1"
+                className="controls__osc-volume__vol-sliders__osc1-slider"
                 onClick={activeOsc1}
               >
                 <CircleSlider
                   value={osc_1_VolSlider}
-                  size={70}
+                  size={50}
                   shadow={false}
                   knobColor={knobColor}
                   showTooltip={true}
                   showPercentage={false}
                   progressColor="#428cc2"
-                  knobRadius={6}
+                  knobRadius={5}
                   min={0}
                   max={1}
                   stepSize={0.1}
@@ -304,25 +304,25 @@ export default function Controls({
               </label>
             </div>
 
-            <div>
+            <div className="controls__osc-volume__vol-sliders__osc2">
               <div
                 className="controls__osc-volume__vol-sliders__osc2-light"
                 style={{ visibility: osc2_light }}
               />
 
               <div
-                className="controls__osc-volume__vol-sliders__osc2"
+                className="controls__osc-volume__vol-sliders__osc2-slider"
                 onClick={activeOsc2}
               >
                 <CircleSlider
                   value={osc_2_VolSlider}
-                  size={70}
+                  size={50}
                   shadow={false}
                   knobColor={knobColor}
                   showTooltip={true}
                   showPercentage={false}
                   progressColor="#428cc2"
-                  knobRadius={6}
+                  knobRadius={5}
                   min={0}
                   max={1}
                   stepSize={0.1}
@@ -409,17 +409,17 @@ export default function Controls({
           </div>
         </div>
 
-        <div className="controls__detune_and_noise">
+        <div className="controls__detune-and-noise">
           <div className="controls__detune-and-noise__detune-slider">
             <CircleSlider
               value={osc1DetuneSlider}
-              size={70}
+              size={50}
               shadow={false}
               knobColor={knobColor}
               showTooltip={true}
               showPercentage={false}
               progressColor="#428cc2"
-              knobRadius={6}
+              knobRadius={5}
               min={-100}
               max={100}
               stepSize={1}
@@ -441,13 +441,13 @@ export default function Controls({
           >
             <CircleSlider
               value={noiseSlider}
-              size={70}
+              size={50}
               shadow={false}
               knobColor={knobColor}
               showTooltip={true}
               showPercentage={false}
               progressColor="#79c6c3"
-              knobRadius={6}
+              knobRadius={5}
               min={0}
               max={1}
               stepSize={0.1}
@@ -472,42 +472,48 @@ export default function Controls({
         <div className="controls__filter">
           <div className="controls__filter__logo">LOGO</div>
           <div className="controls__filter__filtertype">
-            <button
-              className="controls__filter__filtertype__lowpass"
-              onClick={(e) => setSelectedFilterType(filterTypes.lowpass)}
-              style={{ background: filtertypeColor.lowpass }}
-            />
-            <label className="controls__filter__filtertype__lowpass-label">
-              Lp
-            </label>
-            <button
-              className="controls__filter__filtertype__bandpass"
-              onClick={(e) => setSelectedFilterType(filterTypes.bandpass)}
-              style={{ background: filtertypeColor.bandpass }}
-            />
-            <label className="controls__filter__filtertype__bandpass-label">
-              Bp
-            </label>
-            <button
-              className="controls__filter__filtertype__highpass"
-              onClick={(e) => setSelectedFilterType(filterTypes.highpass)}
-              style={{ background: filtertypeColor.highpass }}
-            />
-            <label className="controls__filter__filtertype__highpass-label">
-              Hp
-            </label>
+            <div>
+              <button
+                className="controls__filter__filtertype__lowpass"
+                onClick={(e) => setSelectedFilterType(filterTypes.lowpass)}
+                style={{ background: filtertypeColor.lowpass }}
+              />
+              <label className="controls__filter__filtertype__lowpass-label">
+                Lp
+              </label>
+            </div>
+            <div>
+              <button
+                className="controls__filter__filtertype__bandpass"
+                onClick={(e) => setSelectedFilterType(filterTypes.bandpass)}
+                style={{ background: filtertypeColor.bandpass }}
+              />
+              <label className="controls__filter__filtertype__bandpass-label">
+                Bp
+              </label>
+            </div>
+            <div>
+              <button
+                className="controls__filter__filtertype__highpass"
+                onClick={(e) => setSelectedFilterType(filterTypes.highpass)}
+                style={{ background: filtertypeColor.highpass }}
+              />
+              <label className="controls__filter__filtertype__highpass-label">
+                Hp
+              </label>
+            </div>
           </div>
 
           <div className="controls__filter__filter-slider">
             <CircleSlider
               value={filterSlider}
-              size={100}
+              size={70}
               shadow={false}
               knobColor={knobColor}
               showTooltip={true}
               showPercentage={false}
               progressColor="#1a1a1a"
-              knobRadius={10}
+              knobRadius={7}
               min={0}
               max={10000}
               stepSize={0.1}
@@ -582,17 +588,22 @@ export default function Controls({
         </div>
 
         <div className="controls__delay">
+          <div className="controls__delay__MIDI">
+          
+            <label className="controls__delay__MIDI__label">MIDI</label>
+            <div className="controls__delay__MIDI__light"></div>
+          </div>
           <div>
             <div className="controls__delay__slider">
               <CircleSlider
                 value={delaySlider}
-                size={70}
+                size={50}
                 shadow={false}
                 knobColor={knobColor}
                 showTooltip={true}
                 showPercentage={false}
                 progressColor="#f7931e"
-                knobRadius={6}
+                knobRadius={5}
                 min={0}
                 max={1}
                 stepSize={0.1}
@@ -616,30 +627,36 @@ export default function Controls({
             step="0.01"
           ></input> */}
           <div className="controls__delay__switches">
-            <label className="controls__delay__switches__keymapping">
-              <input
-                type="checkbox"
-                value={1}
-                defaultChecked={keyMapping}
-                onChange={toggleCheckedKeyMapping}
-              />
-              <div className="controls__delay__switches__keymapping-slider"></div>
-            </label>
-            <label className="controls__delay__switches__keymapping-label">
-              Mapping
-            </label>
-            <label className="controls__delay__switches__darkmode">
-              <input
-                type="checkbox"
-                value={1}
-                defaultChecked={darkmode}
-                onChange={toggleCheckedDarkmode}
-              />
-              <div className="controls__delay__switches__darkmode-slider"></div>
-            </label>
-            <label className="controls__delay__switches__darkmode-label">
-              Darkmode
-            </label>
+            <div>
+              <label className="controls__delay__switches__keymapping">
+                <input
+                  type="checkbox"
+                  value={1}
+                  defaultChecked={keyMapping}
+                  onChange={toggleCheckedKeyMapping}
+                />
+                <div className="controls__delay__switches__keymapping-slider"></div>
+              </label>
+
+              <div className="controls__delay__switches__keymapping-label">
+                Mapping
+              </div>
+            </div>
+            <div>
+              <label className="controls__delay__switches__darkmode">
+                <input
+                  type="checkbox"
+                  value={1}
+                  defaultChecked={darkmode}
+                  onChange={toggleCheckedDarkmode}
+                />
+                <div className="controls__delay__switches__darkmode-slider"></div>
+              </label>
+
+              <div className="controls__delay__switches__darkmode-label">
+                Darkmode
+              </div>
+            </div>
           </div>
         </div>
       </div>
