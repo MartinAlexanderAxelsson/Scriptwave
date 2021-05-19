@@ -28,7 +28,7 @@
   background: rgb(77, 77, 77);
   display: flex;
   justify-content: space-between;
-  padding-left:15px;
+  padding-left: 15px;
 
   &__volume {
     display: flex;
@@ -287,19 +287,25 @@
     flex-direction: column;
     justify-content: flex-end;
     text-align: center;
-
+    width: 80px;
+   
     &__logo {
+        margin-left: -25px;
+        margin-top: -30px;
+      &-img {
+        width: 130px;
+      }
     }
     &__filtertype {
       display: flex;
       justify-content: center;
       justify-content: space-between;
-
+      margin-top: 10px;
       &__lowpass {
         display: flex;
         background: #ffffff;
-        width: 15px;
-        height: 15px;
+        width: 10px;
+        height: 10px;
         border-radius: 100px;
         border: none;
         outline: none;
@@ -307,8 +313,8 @@
       &__bandpass {
         display: flex;
         background: #ffffff;
-        width: 15px;
-        height: 15px;
+        width: 10px;
+        height: 10px;
         border-radius: 100px;
         border: none;
         outline: none;
@@ -316,8 +322,8 @@
       &__highpass {
         display: flex;
         background: #ffffff;
-        width: 15px;
-        height: 15px;
+        width: 10px;
+        height: 10px;
         border-radius: 100px;
         border: none;
         outline: none;
@@ -327,21 +333,21 @@
         font-family: orator-std, monospace;
         font-weight: 900;
         font-style: normal;
-        font-size: 13px;
+        font-size: 12px;
         color: #ffffff;
       }
       &__bandpass-label {
         font-family: orator-std, monospace;
         font-weight: 900;
         font-style: normal;
-        font-size: 13px;
+        font-size: 12px;
         color: #ffffff;
       }
       &__highpass-label {
         font-family: orator-std, monospace;
         font-weight: 900;
         font-style: normal;
-        font-size: 13px;
+        font-size: 12px;
         color: #ffffff;
       }
     }
@@ -399,7 +405,6 @@
       }
     }
     &__decay-label {
- 
       font-weight: 900;
       font-style: normal;
       font-size: 18px;
@@ -440,55 +445,53 @@
   }
 
   &__delay {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-   
- 
-      margin-left: -12px;
-  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    margin-left: -12px;
+
     &__slider {
-        margin-top: 12px;
-        margin-bottom: 5px;
-        width: 50px;
-        height: 50px;
-        border-radius: 100px;
-        padding: 5px;
+      margin-top: 12px;
+      margin-bottom: 5px;
+      width: 50px;
+      height: 50px;
+      border-radius: 100px;
+      padding: 5px;
       background: #f7931e;
     }
     &__label {
-   
-        font-weight: 900;
-        font-style: normal;
-        font-size: 18px;
+      font-weight: 900;
+      font-style: normal;
+      font-size: 18px;
       color: #f7931e;
     }
     &__MIDI {
-        display: flex;
-     
-        align-items: center;
-        justify-content: space-between;
-        width:65px;
-        margin-left: 110px;
-        &__light {
-            width: 15px;
-            height: 15px;
-            border-radius: 50px;
-            background: red;
-        }
-        &__label {
-            font-weight: 900;
-            font-style: normal;
-            font-size: 18px;
-            color: #428cc2;
-        }
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+      width: 65px;
+      margin-left: 110px;
+      &__light {
+        width: 15px;
+        height: 15px;
+        border-radius: 50px;
+        background: red;
+      }
+      &__label {
+        font-weight: 900;
+        font-style: normal;
+        font-size: 18px;
+        color: #428cc2;
+      }
     }
     &__switches {
       display: flex;
       justify-content: space-between;
       margin-top: 12px;
-    
+
       width: 190px;
       &__keymapping {
         // position: relative;

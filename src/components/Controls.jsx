@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react"
 import "./controls.scss"
 import "./controls.css"
 import { CircleSlider } from "react-circle-slider"
+import logo from "../images/scriptwave_LOGO.png"
+
 export default function Controls({
   masterVolSlider,
   setMasterVolSlider,
@@ -446,7 +448,7 @@ export default function Controls({
               knobColor={knobColor}
               showTooltip={true}
               showPercentage={false}
-              progressColor="#79c6c3"
+              progressColor={noiseSliderColor}
               knobRadius={5}
               min={0}
               max={1}
@@ -468,9 +470,11 @@ export default function Controls({
             Noise
           </label>
         </div>
-
+       
         <div className="controls__filter">
-          <div className="controls__filter__logo">LOGO</div>
+        <div className="controls__filter__logo">
+            <img className="controls__filter__logo-img" src={logo} />
+          </div>
           <div className="controls__filter__filtertype">
             <div>
               <button
@@ -589,7 +593,6 @@ export default function Controls({
 
         <div className="controls__delay">
           <div className="controls__delay__MIDI">
-          
             <label className="controls__delay__MIDI__label">MIDI</label>
             <div className="controls__delay__MIDI__light"></div>
           </div>

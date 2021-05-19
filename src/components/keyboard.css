@@ -37,7 +37,7 @@ $border: none; */
  
     }
     to {
-      background: rgb(151, 191, 201);
+      background: rgb(77, 77, 77);
     }
   }
   
@@ -46,7 +46,7 @@ $border: none; */
       background: rgb(41, 171, 226);
     }
     to {
-      background: rgb(151, 191, 201);
+      background: rgb(77, 77, 77);
     }
   }
   
