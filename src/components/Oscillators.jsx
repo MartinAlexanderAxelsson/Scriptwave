@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import Controls from "./Controls"
 import Keyboard from "./Keyboard"
 import "./oscillators.scss"
+import {AudioContext} from '../context/AudioContext'
+
 export default function Oscillators() {
-  const audio = new (window.AudioContext || window.webkitAudioContext)()
+    const { audio } = useContext(AudioContext)
 
   const [f, setF] = useState(349.228)
   const [gb, setGb] = useState(369.994)
@@ -106,9 +108,9 @@ export default function Oscillators() {
   const [waveFormOsc2, setWaveFormOsc2] = useState("sine")
   const [selectedFilterType, setSelectedFilterType] = useState("lowpass")
 
-  const [masterVolSlider, setMasterVolSlider] = useState(0.5)
-  const [osc_1_VolSlider, setOsc_1_VolSlider] = useState(0.5)
-  const [osc_2_VolSlider, setOsc_2_VolSlider] = useState(0.5)
+  const [masterVolSlider, setMasterVolSlider] = useState(0.25)
+  const [osc_1_VolSlider, setOsc_1_VolSlider] = useState(0.25)
+  const [osc_2_VolSlider, setOsc_2_VolSlider] = useState(0.25)
   const [osc1DetuneSlider, setOsc1DetuneSlider] = useState(0)
   const [noiseSlider, setNoiseSlider] = useState(0)
 

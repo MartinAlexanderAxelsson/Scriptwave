@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 // import "./keyboard.scss"
  import "./keyboard.css"
+import {AudioContext} from '../context/AudioContext'
+
 export default function Keyboard({
   notes,
   waveForms,
@@ -12,7 +14,7 @@ export default function Keyboard({
   darkmode,
 }) {
 
- 
+    const { audio } = useContext(AudioContext)
     const root = document.documentElement;
     root.style.setProperty('--background-color__keyboard', darkmode ? 'rgb(77, 77, 77)' : 'rgb(151, 191, 201)');
     root.style.setProperty('--background-color__blackkeys', darkmode ? 'rgb(77, 77, 77)' : 'rgb(151, 191, 201)');

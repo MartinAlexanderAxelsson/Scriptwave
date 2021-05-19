@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import "./controls.scss"
 import "./controls.css"
+import {AudioContext} from '../context/AudioContext'
 import { CircleSlider } from "react-circle-slider"
 import logo from "../images/scriptwave_LOGO.png"
 
@@ -46,6 +47,9 @@ export default function Controls({
   darkmode,
   setDarkmode,
 }) {
+
+    const { audio } = useContext(AudioContext)
+
   const root = document.documentElement
   root.style.setProperty(
     "--color__darkmode",
@@ -248,8 +252,8 @@ console.log(delaySlider)
               progressColor="#f7931e"
               knobRadius={7}
               min={0}
-              max={1}
-              stepSize={0.1}
+              max={0.5}
+              stepSize={0.01}
               circleColor="#f7931e;"
               tooltipSize={1}
               tooltipColor="#ff5722"
@@ -298,8 +302,8 @@ console.log(delaySlider)
                   progressColor="#428cc2"
                   knobRadius={5}
                   min={0}
-                  max={1}
-                  stepSize={0.1}
+                  max={0.5}
+                  stepSize={0.01}
                   circleColor="#ff5722"
                   tooltipSize={1}
                   tooltipColor="#ff5722"
@@ -334,8 +338,8 @@ console.log(delaySlider)
                   progressColor="#428cc2"
                   knobRadius={5}
                   min={0}
-                  max={1}
-                  stepSize={0.1}
+                  max={0.5}
+                  stepSize={0.01}
                   circleColor="#ff5722"
                   tooltipSize={1}
                   tooltipColor="#ff5722"
