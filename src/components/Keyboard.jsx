@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react"
 // import "./keyboard.scss"
- import "./keyboard.css"
-import {AudioContext} from '../context/AudioContext'
+import "./styles/keyboard.css"
+import { AudioContext } from "../context/AudioContext"
 
 export default function Keyboard({
   notes,
@@ -13,16 +13,35 @@ export default function Keyboard({
   keyMapping,
   darkmode,
 }) {
+  //fix blackkeys keyhit in non darkmode (fades to darkmode color) in keyboard CSS file
 
-    const { audio } = useContext(AudioContext)
-    const root = document.documentElement;
-    root.style.setProperty('--background-color__keyboard', darkmode ? 'rgb(77, 77, 77)' : 'rgb(151, 191, 201)');
-    root.style.setProperty('--background-color__blackkeys', darkmode ? 'rgb(77, 77, 77)' : 'rgb(151, 191, 201)');
-     root.style.setProperty('--border__whitekeys', darkmode ? '3px solid rgb(77, 77, 77)' : '3px solid rgb(151, 191, 201)');
-    root.style.setProperty('--color__keymapping__whitekeys', darkmode ? 'rgb(77, 77, 77)' : 'rgb(151, 191, 201)');
-    root.style.setProperty('--background-color__keyHit__whitekeys', darkmode ? 'rgb(251, 176, 59)' : 'rgb(194, 243, 148)');
-    root.style.setProperty('--background-color__keyHit2__whitekeys', darkmode ? 'rgb(250, 116, 39)' : 'rgb(255, 219, 99)');
-    
+  const { audio } = useContext(AudioContext)
+  const root = document.documentElement
+  root.style.setProperty(
+    "--background-color__keyboard",
+    darkmode ? "rgb(77, 77, 77)" : "rgb(151, 191, 201)"
+  )
+  root.style.setProperty(
+    "--background-color__blackkeys",
+    darkmode ? "rgb(77, 77, 77)" : "rgb(151, 191, 201)"
+  )
+  root.style.setProperty(
+    "--border__whitekeys",
+    darkmode ? "3px solid rgb(77, 77, 77)" : "3px solid rgb(151, 191, 201)"
+  )
+  root.style.setProperty(
+    "--color__keymapping__whitekeys",
+    darkmode ? "rgb(77, 77, 77)" : "rgb(151, 191, 201)"
+  )
+  root.style.setProperty(
+    "--background-color__keyHit__whitekeys",
+    darkmode ? "rgb(251, 176, 59)" : "rgb(194, 243, 148)"
+  )
+  root.style.setProperty(
+    "--background-color__keyHit2__whitekeys",
+    darkmode ? "rgb(250, 116, 39)" : "rgb(255, 219, 99)"
+  )
+
   const [className, setClassName] = useState({
     KeyA: "KeyA",
     KeyW: "KeyW",
@@ -74,7 +93,6 @@ export default function Keyboard({
   }
 
   useEffect(() => {
-   
     window.addEventListener("keydown", listenerKeyDown)
 
     return () => {
@@ -83,7 +101,6 @@ export default function Keyboard({
   }, [waveForms, className])
   return (
     <>
-  
       <div className="keyboard">
         <div className="keyboard__white-key__wrapper">
           <button
@@ -204,7 +221,6 @@ export default function Keyboard({
         </button>
         {/* </div> */}
       </div>
-     
     </>
   )
 }

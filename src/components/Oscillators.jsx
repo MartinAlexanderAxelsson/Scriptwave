@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from "react"
 import Controls from "./Controls"
 import Keyboard from "./Keyboard"
-import "./oscillators.scss"
-import {AudioContext} from '../context/AudioContext'
+import "./styles/oscillators.scss"
+import { AudioContext } from "../context/AudioContext"
+import MIDI from "./MIDI"
 
 export default function Oscillators() {
-    const { audio } = useContext(AudioContext)
+  const { audio } = useContext(AudioContext)
 
   const [f, setF] = useState(349.228)
   const [gb, setGb] = useState(369.994)
@@ -47,6 +48,28 @@ export default function Oscillators() {
     Semicolon: a2,
     BracketLeft: bb2,
     Quote: b2,
+  }
+
+  const MIDI_notes = {
+    key53: "KeyA",
+    key54: "KeyW",
+    key55: "KeyS",
+    key56: "KeyE",
+    key57: "KeyD",
+    key58: "KeyR",
+    key59: "KeyF",
+    key60: "KeyG",
+    key61: "KeyY",
+    key62: "KeyH",
+    key63: "KeyU",
+    key64: "KeyJ",
+    key65: "KeyK",
+    key66: "KeyO",
+    key67: "KeyL",
+    key68: "KeyP",
+    key69: "Semicolon",
+    key70: "BracketLeft",
+    key71: "Quote",
   }
 
   function octaveUp() {
@@ -92,6 +115,8 @@ export default function Oscillators() {
     setBb2(bb2 / 2)
     setB2(b2 / 2)
   }
+
+
   const waveForms = {
     sine: "sine",
     square: "square",
@@ -116,9 +141,9 @@ export default function Oscillators() {
 
   const [filterSlider, setFilterSlider] = useState(9200)
   const [envelope_A_Slider, setEnvelope_A_Slider] = useState(0.001)
-  const [envelope_D_Slider, setEnvelope_D_Slider] = useState(0.5)
-  const [envelope_S_Slider, setEnvelope_S_Slider] = useState(0)
-  const [envelope_R_Slider, setEnvelope_R_Slider] = useState(1)
+  const [envelope_D_Slider, setEnvelope_D_Slider] = useState(0.2)
+  const [envelope_S_Slider, setEnvelope_S_Slider] = useState(0.2)
+  const [envelope_R_Slider, setEnvelope_R_Slider] = useState(1.1)
   const [delaySlider, setDelaySlider] = useState(0)
   const [delayFeedbackSlider, setDelayFeedbackSlider] = useState(0)
   const [delayOnOff, setDelayOnOff] = useState(0)
@@ -168,7 +193,7 @@ export default function Oscillators() {
   osc_2_Volume.gain.value = osc_2_VolSlider
 
   let key
-  //   let envelope
+
   function oscillator_1(key) {
     let osc = audio.createOscillator()
     let envelope = audio.createGain()
@@ -189,15 +214,17 @@ export default function Oscillators() {
       )
     } else {
       envelope.gain.linearRampToValueAtTime(
-        0,
+        0.01,
         audio.currentTime + Number(envelope_D_Slider)
       )
     }
 
-    envelope.gain.linearRampToValueAtTime(
-      0,
-      audio.currentTime + Number(envelope_R_Slider)
-    )
+    if (envelope_R_Slider > 0) {
+      envelope.gain.linearRampToValueAtTime(
+        0,
+        audio.currentTime + Number(envelope_R_Slider)
+      )
+    }
 
     osc.start(audio.currentTime)
 
@@ -205,13 +232,6 @@ export default function Oscillators() {
     delayFeedback.connect(delay)
 
     osc.connect(envelope)
-    // envelope.connect(filter)
-    // filter.connect(osc_1_Volume)
-    // osc_1_Volume.connect(delay)
-    // osc_1_Volume.connect(masterVolume)
-    // delay.connect(masterVolume)
-    // masterVolume.connect(audio.destination)
-
     envelope.connect(osc_1_Volume)
     osc_1_Volume.connect(filter)
     filter.connect(delay)
@@ -231,7 +251,7 @@ export default function Oscillators() {
   function oscillator_2(key) {
     let osc2 = audio.createOscillator()
     let envelope = audio.createGain()
-    // osc.detune.value = osc1DetuneSlider
+ 
     osc2.frequency.value = notes[key]
     osc2.type = waveFormOsc2
 
@@ -248,20 +268,19 @@ export default function Oscillators() {
       )
     } else {
       envelope.gain.linearRampToValueAtTime(
-        0,
+        0.01,
         audio.currentTime + Number(envelope_D_Slider)
       )
     }
 
-    envelope.gain.linearRampToValueAtTime(
-      0,
-      audio.currentTime + Number(envelope_R_Slider)
-    )
+    if (envelope_R_Slider > 0) {
+      envelope.gain.linearRampToValueAtTime(
+        0,
+        audio.currentTime + Number(envelope_R_Slider)
+      )
+    }
 
     osc2.start(audio.currentTime)
-
-    // delay.connect(delayFeedback)
-    // delayFeedback.connect(delay)
 
     osc2.connect(envelope)
     envelope.connect(osc_2_Volume)
@@ -293,6 +312,7 @@ export default function Oscillators() {
       output[i] = Math.random() * 2 - 1
     }
     noise.buffer = buffer
+
     envelope.gain.setValueAtTime(0, audio.currentTime)
     envelope.gain.linearRampToValueAtTime(
       1,
@@ -306,15 +326,17 @@ export default function Oscillators() {
       )
     } else {
       envelope.gain.linearRampToValueAtTime(
-        0,
+        0.01,
         audio.currentTime + Number(envelope_D_Slider)
       )
     }
 
-    envelope.gain.linearRampToValueAtTime(
-      0,
-      audio.currentTime + Number(envelope_R_Slider)
-    )
+    if (envelope_R_Slider > 0) {
+      envelope.gain.linearRampToValueAtTime(
+        0,
+        audio.currentTime + Number(envelope_R_Slider)
+      )
+    }
 
     noise.start(audio.currentTime)
 
@@ -326,9 +348,7 @@ export default function Oscillators() {
     noiseFilterHigh.type = "highpass"
     noiseFilterHigh.frequency.value = 800
 
-    // delay.connect(delayFeedback)
-    // delayFeedback.connect(delay)
-    // noiseVolume.connect(delay)
+  
     noise.connect(envelope)
     envelope.connect(noiseFilterHigh)
     noiseFilterHigh.connect(noiseFilterLow)
@@ -345,6 +365,9 @@ export default function Oscillators() {
         Number(envelope_R_Slider)
     )
   }
+
+
+  
 
   return (
     <>
@@ -408,6 +431,15 @@ export default function Oscillators() {
             oscillator_2={oscillator_2}
             whiteNoise={whiteNoise}
             key={key}
+          />
+          <MIDI
+              waveForms={waveForms}
+              
+            oscillator_1={oscillator_1}
+            oscillator_2={oscillator_2}
+            whiteNoise={whiteNoise}
+            key={key}
+            MIDI_notes={MIDI_notes}
           />
         </div>
       </div>

@@ -57,12 +57,12 @@
       margin-top: 20px;
       &__btnUp {
         @include octBtn;
-        background-image: url("../images/oct_up.png");
+        background-image: url("../../images/oct_up.png");
         margin-left: auto;
       }
       &__btnDown {
         @include octBtn;
-        background-image: url("../images/oct_down.png");
+        background-image: url("../../images/oct_down.png");
       }
 
       &__btnUp:active,
@@ -159,28 +159,28 @@
         margin-bottom: 4px;
         &__sinBtn {
           @include waveformBtn;
-          background-image: url("../images/sine_wave.png");
+          background-image: url("../../images/sine_wave.png");
           background-size: 23px 23px;
           margin-right: 10px;
         }
 
         &__sawBtn {
           @include waveformBtn;
-          background-image: url("../images/saw_wave.png");
+          background-image: url("../../images/saw_wave.png");
           background-size: 21px 21px;
           margin-right: 10px;
         }
 
         &__sqrBtn {
           @include waveformBtn;
-          background-image: url("../images/square_wave.png");
+          background-image: url("../../images/square_wave.png");
           background-size: 23px 23px;
           margin-right: 10px;
         }
 
         &__triBtn {
           @include waveformBtn;
-          background-image: url("../images/triangle_wave.png");
+          background-image: url("../../images/triangle_wave.png");
           background-size: 21px 21px;
           //   margin-left: auto;
         }
@@ -189,28 +189,28 @@
         margin-bottom: 4px;
         &__sinBtn {
           @include waveformBtn;
-          background-image: url("../images/sine_wave.png");
+          background-image: url("../../images/sine_wave.png");
           background-size: 23px 23px;
           margin-right: 10px;
         }
 
         &__sawBtn {
           @include waveformBtn;
-          background-image: url("../images/saw_wave.png");
+          background-image: url("../../images/saw_wave.png");
           background-size: 21px 21px;
           margin-right: 10px;
         }
 
         &__sqrBtn {
           @include waveformBtn;
-          background-image: url("../images/square_wave.png");
+          background-image: url("../../images/square_wave.png");
           background-size: 23px 23px;
           margin-right: 10px;
         }
 
         &__triBtn {
           @include waveformBtn;
-          background-image: url("../images/triangle_wave.png");
+          background-image: url("../../images/triangle_wave.png");
           background-size: 21px 21px;
           //   margin-left:auto;
         }

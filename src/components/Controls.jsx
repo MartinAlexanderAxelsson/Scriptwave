@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react"
-import "./controls.scss"
-import "./controls.css"
+import "./styles/controls.scss"
+import "./styles/controls.css"
 import {AudioContext} from '../context/AudioContext'
 import { CircleSlider } from "react-circle-slider"
 import logo from "../images/scriptwave_LOGO.png"
@@ -526,19 +526,19 @@ console.log(delaySlider)
               size={70}
               shadow={false}
               knobColor={knobColor}
-              showTooltip={true}
+              showTooltip={false}
               showPercentage={false}
               progressColor="#1a1a1a"
               knobRadius={7}
               min={0}
               max={10000}
               stepSize={0.1}
-              circleColor="#ff5722"
-              tooltipSize={1}
-              tooltipColor="#ff5722"
-              circleWidth={0}
-              progressWidth={10}
-              circleColor="#ff5722"
+            //   circleColor="#ff5722"  FIX THIS FOR REST OF SLIDERS TO!!!!!!!!
+            //   tooltipSize={1}
+            //   tooltipColor="#ff5722"
+            //   circleWidth={0}
+            //   progressWidth={10}
+               circleColor="#1a1a1a"
               onChange={handleFilter}
             />
           </div>
@@ -552,8 +552,8 @@ console.log(delaySlider)
                 className="controls__adsr__attack-wrapper__slider"
                 onChange={(e) => setEnvelope_A_Slider(e.target.value)}
                 type="range"
-                min="0.01"
-                max="1"
+                min="0.001"
+                max="2.001"
                 defaultValue={envelope_A_Slider}
                 step="0.1"
               ></input>
@@ -565,8 +565,8 @@ console.log(delaySlider)
               <input
                 onChange={(e) => setEnvelope_D_Slider(e.target.value)}
                 type="range"
-                min="0"
-                max="4"
+                min="0.01"
+                max="1.01"
                 defaultValue={envelope_D_Slider}
                 step="0.1"
               ></input>
@@ -593,8 +593,8 @@ console.log(delaySlider)
               <input
                 onChange={(e) => setEnvelope_R_Slider(e.target.value)}
                 type="range"
-                min="1"
-                max="5"
+                min="1.1"
+                max="4.1"
                 defaultValue={envelope_R_Slider}
                 step="0.1"
               ></input>
