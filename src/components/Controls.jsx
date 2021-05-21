@@ -646,19 +646,19 @@ console.log(delaySlider)
                 size={45}
                 shadow={false}
                 knobColor={knobColor}
-                showTooltip={true}
+                showTooltip={false}
                 showPercentage={false}
                 progressColor="#d8d6d6"
                 knobRadius={4.5}
                 min={0}
                 max={0.9}
                 stepSize={0.1}
-                circleColor="#ff5722"
+          
                 tooltipSize={1}
-                tooltipColor="#ff5722"
+                // tooltipColor="#ff5722"
                 circleWidth={0}
                 progressWidth={10}
-                circleColor="#ff5722"
+                // circleColor="#ff5722"
                 onChange={handleDelayFeedback}
               />
             </div>
