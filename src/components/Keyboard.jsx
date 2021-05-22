@@ -42,6 +42,8 @@ export default function Keyboard({
     darkmode ? "rgb(250, 116, 39)" : "rgb(255, 219, 99)"
   )
 
+  // deklarera upp i osc komponenten skicka sen till midi och keyboard för att komma åt classname i midi komp
+  // och lysa upp keyboarden
   const [className, setClassName] = useState({
     KeyA: "KeyA",
     KeyW: "KeyW",
@@ -70,7 +72,9 @@ export default function Keyboard({
     whiteNoise()
   }
 
+
   const listenerKeyDown = (event) => {
+
     const pressedKey = event.code
 
     const allKeys = Object.keys(notes).map((allKeys) => {
@@ -80,7 +84,7 @@ export default function Keyboard({
     const match = allKeys.find((e) => e === pressedKey)
 
     if (match) {
-      if (event.repeat) return
+     if (event.repeat) return
 
       playNote((key = pressedKey))
 
@@ -91,12 +95,12 @@ export default function Keyboard({
       }
     }
   }
-
+  console.log(waveForms)
   useEffect(() => {
     window.addEventListener("keydown", listenerKeyDown)
-
     return () => {
       window.removeEventListener("keydown", listenerKeyDown)
+
     }
   }, [waveForms, className])
   return (

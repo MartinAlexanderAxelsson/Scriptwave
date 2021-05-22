@@ -1,9 +1,10 @@
-
-
 .oscillators-wrapper {
   display: flex;
   background: #1a1a1a;
   justify-content: center;
+  //added below with midi message
+  align-items: center;
+  flex-direction: column;
 }
 
 .oscillators {
@@ -15,3 +16,57 @@
   flex-direction: column;
   border-radius: 30px;
 }
+
+.midi-message {
+  color: white;
+  text-align: center;
+  padding-top: 15px;
+  margin-bottom: -36px;
+  opacity: 1;
+  animation: fade 20s linear forwards;
+
+  &__img {
+    width: 25px;
+
+    margin-bottom: -6px;
+  }
+}
+
+@keyframes fade {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100%,
+  0% {
+    opacity: 0;
+  }
+}
+
+.user-interaction {
+    color: white;
+    text-align: center;
+    padding-top: 15px;
+    margin-bottom: -36px;
+    opacity: 1;
+    animation: fade2 2s linear forwards;
+  
+    &__img {
+      width: 25px;
+  
+      margin-bottom: -6px;
+    }
+  }
+
+  @keyframes fade2 {
+    0% {
+      opacity: 0;
+    }
+    
+    100% {
+      opacity: 1;
+    }
+  }

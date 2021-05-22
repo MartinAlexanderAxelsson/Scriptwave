@@ -4,6 +4,7 @@ import Keyboard from "./Keyboard"
 import "./styles/oscillators.scss"
 import { AudioContext } from "../context/AudioContext"
 import MIDI from "./MIDI"
+import warning from "../images/warning_icon.png"
 
 export default function Oscillators() {
   const { audio } = useContext(AudioContext)
@@ -50,27 +51,27 @@ export default function Oscillators() {
     Quote: b2,
   }
 
-  const MIDI_notes = {
-    key53: "KeyA",
-    key54: "KeyW",
-    key55: "KeyS",
-    key56: "KeyE",
-    key57: "KeyD",
-    key58: "KeyR",
-    key59: "KeyF",
-    key60: "KeyG",
-    key61: "KeyY",
-    key62: "KeyH",
-    key63: "KeyU",
-    key64: "KeyJ",
-    key65: "KeyK",
-    key66: "KeyO",
-    key67: "KeyL",
-    key68: "KeyP",
-    key69: "Semicolon",
-    key70: "BracketLeft",
-    key71: "Quote",
-  }
+  //   const MIDI_notes = {
+  //     key53: "KeyA",
+  //     key54: "KeyW",
+  //     key55: "KeyS",
+  //     key56: "KeyE",
+  //     key57: "KeyD",
+  //     key58: "KeyR",
+  //     key59: "KeyF",
+  //     key60: "KeyG",
+  //     key61: "KeyY",
+  //     key62: "KeyH",
+  //     key63: "KeyU",
+  //     key64: "KeyJ",
+  //     key65: "KeyK",
+  //     key66: "KeyO",
+  //     key67: "KeyL",
+  //     key68: "KeyP",
+  //     key69: "Semicolon",
+  //     key70: "BracketLeft",
+  //     key71: "Quote",
+  //   }
 
   function octaveUp() {
     setF(f * 2)
@@ -116,7 +117,6 @@ export default function Oscillators() {
     setB2(b2 / 2)
   }
 
-
   const waveForms = {
     sine: "sine",
     square: "square",
@@ -147,6 +147,8 @@ export default function Oscillators() {
   const [delaySlider, setDelaySlider] = useState(0)
   const [delayFeedbackSlider, setDelayFeedbackSlider] = useState(0)
   const [delayOnOff, setDelayOnOff] = useState(0)
+
+  const [MIDI_connected, setMIDI_connected] = useState(false)
 
   const [darkmode, setDarkmode] = useState(true)
   const [keyMapping, setKeyMapping] = useState({
@@ -251,7 +253,7 @@ export default function Oscillators() {
   function oscillator_2(key) {
     let osc2 = audio.createOscillator()
     let envelope = audio.createGain()
- 
+
     osc2.frequency.value = notes[key]
     osc2.type = waveFormOsc2
 
@@ -348,7 +350,6 @@ export default function Oscillators() {
     noiseFilterHigh.type = "highpass"
     noiseFilterHigh.frequency.value = 800
 
-  
     noise.connect(envelope)
     envelope.connect(noiseFilterHigh)
     noiseFilterHigh.connect(noiseFilterLow)
@@ -366,15 +367,40 @@ export default function Oscillators() {
     )
   }
 
+  const [MIDI_alert_message, setMIDI_alert_message] = useState("none")
+  const [user_interaction_message, setUser_interaction_message] = useState("none")
+  const [check_user_interaction, setCheck_user_interaction] = useState(false)
+  const listenerClick = (event) => {
+    setCheck_user_interaction(true)
 
+}
+
+  useEffect(() => {
   
-
+    window.addEventListener("click", listenerClick)
+    return () => {
+  
+      window.removeEventListener("click", listenerClick)
+    }
+  }, [])
   return (
     <>
       <div
         className="oscillators-wrapper"
         style={{ background: mainBackgroundColor }}
       >
+        <div className="midi-message" style={{ display: MIDI_alert_message }}>
+          <img className="midi-message__img" src={warning} /> The browser you
+          are using does not support Web MIDI, but you can play using your
+          keyboard:)
+        </div>
+        <div
+          className="user-interaction"
+          style={{ display: user_interaction_message }}
+        >
+          <img className="user-interaction__img" src={warning} /> Click anywhere
+          on the page to start playing your Midi device
+        </div>
         <div
           className="oscillators"
           style={{ background: synthBackgroundColor }}
@@ -420,6 +446,7 @@ export default function Oscillators() {
             setKeyMapping={setKeyMapping}
             darkmode={darkmode}
             setDarkmode={setDarkmode}
+            MIDI_connected={MIDI_connected}
           />
           <Keyboard
             keyMapping={keyMapping}
@@ -433,13 +460,16 @@ export default function Oscillators() {
             key={key}
           />
           <MIDI
-              waveForms={waveForms}
-              
             oscillator_1={oscillator_1}
             oscillator_2={oscillator_2}
             whiteNoise={whiteNoise}
             key={key}
-            MIDI_notes={MIDI_notes}
+            // MIDI_notes={MIDI_notes}
+            setMIDI_connected={setMIDI_connected}
+            MIDI_connected={MIDI_connected}
+            setMIDI_alert_message={setMIDI_alert_message}
+            setUser_interaction_message={setUser_interaction_message}
+            check_user_interaction={check_user_interaction}
           />
         </div>
       </div>

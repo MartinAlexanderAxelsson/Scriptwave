@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react"
 import "./styles/controls.scss"
 import "./styles/controls.css"
-import {AudioContext} from '../context/AudioContext'
+import { AudioContext } from "../context/AudioContext"
 import { CircleSlider } from "react-circle-slider"
 import logo from "../images/scriptwave_LOGO.png"
 
@@ -46,9 +46,9 @@ export default function Controls({
   setKeyMapping,
   darkmode,
   setDarkmode,
+  MIDI_connected,
 }) {
-
-    const { audio } = useContext(AudioContext)
+  const { audio } = useContext(AudioContext)
 
   const root = document.documentElement
   root.style.setProperty(
@@ -84,6 +84,15 @@ export default function Controls({
   const [displayWaveform__osc2, setDisplayWaveform__osc2] = useState("none")
   const [osc1_light, setOsc1_light] = useState("visible")
   const [osc2_light, setOsc2_light] = useState("hidden")
+  const [MIDI_light, setMIDI_light] = useState("")
+
+  function MIDI_ligtOnOff() {
+    if (MIDI_connected == true) {
+      setMIDI_light("rgb(0, 255, 0)")
+    } else {
+      setMIDI_light("red")
+    }
+  }
 
   function toggleDarkmode() {
     if (darkmode === true) {
@@ -219,16 +228,16 @@ export default function Controls({
     setOsc1_light("hidden")
     setOsc2_light("visible")
   }
-console.log(delaySlider)
+  console.log(noiseSlider)
   useEffect(() => {
     toggleDarkmode()
-
+    MIDI_ligtOnOff()
     if (delaySlider == 0) {
-    //   setDelayOnOff(0)
+      //   setDelayOnOff(0)
       setDelayFeedbackSlider(0)
-    //disable delay or feedback
+      //disable delay or feedback
     } else {
-    //   setDelayOnOff(0.2)
+      //   setDelayOnOff(0.2)
     }
   }, [delaySlider, toggleDarkmode])
 
@@ -247,7 +256,7 @@ console.log(delaySlider)
               size={70}
               shadow={false}
               knobColor={knobColor}
-              showTooltip={true}
+              showTooltip={false}
               showPercentage={false}
               progressColor="#f7931e"
               knobRadius={7}
@@ -297,7 +306,7 @@ console.log(delaySlider)
                   size={50}
                   shadow={false}
                   knobColor={knobColor}
-                  showTooltip={true}
+                  showTooltip={false}
                   showPercentage={false}
                   progressColor="#428cc2"
                   knobRadius={5}
@@ -333,7 +342,7 @@ console.log(delaySlider)
                   size={50}
                   shadow={false}
                   knobColor={knobColor}
-                  showTooltip={true}
+                  showTooltip={false}
                   showPercentage={false}
                   progressColor="#428cc2"
                   knobRadius={5}
@@ -430,7 +439,7 @@ console.log(delaySlider)
               size={50}
               shadow={false}
               knobColor={knobColor}
-              showTooltip={true}
+              showTooltip={false}
               showPercentage={false}
               progressColor="#428cc2"
               knobRadius={5}
@@ -458,7 +467,7 @@ console.log(delaySlider)
               size={50}
               shadow={false}
               knobColor={knobColor}
-              showTooltip={true}
+              showTooltip={false}
               showPercentage={false}
               progressColor={noiseSliderColor}
               knobRadius={5}
@@ -467,10 +476,8 @@ console.log(delaySlider)
               stepSize={0.1}
               circleColor="#ff5722"
               tooltipSize={1}
-              tooltipColor="#ff5722"
               circleWidth={0}
               progressWidth={10}
-              circleColor="#ff5722"
               onChange={handleNoise_volume}
             />
           </div>
@@ -482,9 +489,9 @@ console.log(delaySlider)
             Noise
           </label>
         </div>
-       
+
         <div className="controls__filter">
-        <div className="controls__filter__logo">
+          <div className="controls__filter__logo">
             <img className="controls__filter__logo-img" src={logo} />
           </div>
           <div className="controls__filter__filtertype">
@@ -533,12 +540,12 @@ console.log(delaySlider)
               min={0}
               max={10000}
               stepSize={0.1}
-            //   circleColor="#ff5722"  FIX THIS FOR REST OF SLIDERS TO!!!!!!!!
-            //   tooltipSize={1}
-            //   tooltipColor="#ff5722"
-            //   circleWidth={0}
-            //   progressWidth={10}
-               circleColor="#1a1a1a"
+              //   circleColor="#ff5722"  FIX THIS FOR REST OF SLIDERS TO!!!!!!!!
+              //   tooltipSize={1}
+              //   tooltipColor="#ff5722"
+              //   circleWidth={0}
+              //   progressWidth={10}
+              circleColor="#1a1a1a"
               onChange={handleFilter}
             />
           </div>
@@ -606,64 +613,64 @@ console.log(delaySlider)
         <div className="controls__delay">
           <div className="controls__delay__MIDI">
             <label className="controls__delay__MIDI__label">MIDI</label>
-            <div className="controls__delay__MIDI__light"></div>
+            <div
+              className="controls__delay__MIDI__light"
+              style={{ background: MIDI_light }}
+            ></div>
           </div>
           <div className="controls__delay__headline">Delay</div>
           <div className="controls__delay__sliders">
-         
-          <div>
-            
-             
-            <div className="controls__delay__sliders__slider-time">
-              <CircleSlider
-                value={delaySlider}
-                size={45}
-                shadow={false}
-                knobColor={knobColor}
-                showTooltip={true}
-                showPercentage={false}
-                progressColor="#d8d6d6"
-                knobRadius={4.5}
-                min={0}
-                max={1}
-                stepSize={0.1}
-                circleColor="#ff5722"
-                tooltipSize={1}
-                tooltipColor="#ff5722"
-                circleWidth={0}
-                progressWidth={10}
-                circleColor="#ff5722"
-              
-                onChange={handleDelay}
-              />
+            <div>
+              <div className="controls__delay__sliders__slider-time">
+                <CircleSlider
+                  value={delaySlider}
+                  size={45}
+                  shadow={false}
+                  knobColor={knobColor}
+                  showTooltip={false}
+                  showPercentage={false}
+                  progressColor="#d8d6d6"
+                  knobRadius={4.5}
+                  min={0}
+                  max={1}
+                  stepSize={0.1}
+                  circleColor="#ff5722"
+                  tooltipSize={1}
+                  tooltipColor="#ff5722"
+                  circleWidth={0}
+                  progressWidth={10}
+                  circleColor="#ff5722"
+                  onChange={handleDelay}
+                />
+              </div>
+              <label className="controls__delay__sliders__label-time">
+                Time
+              </label>
             </div>
-            <label className="controls__delay__sliders__label-time">Time</label>
-          </div>
-          <div>
-            <div className="controls__delay__sliders__slider-repeat">
-              <CircleSlider
-                value={delayFeedbackSlider}
-                size={45}
-                shadow={false}
-                knobColor={knobColor}
-                showTooltip={false}
-                showPercentage={false}
-                progressColor="#d8d6d6"
-                knobRadius={4.5}
-                min={0}
-                max={0.9}
-                stepSize={0.1}
-          
-                tooltipSize={1}
-                // tooltipColor="#ff5722"
-                circleWidth={0}
-                progressWidth={10}
-                // circleColor="#ff5722"
-                onChange={handleDelayFeedback}
-              />
+            <div>
+              <div className="controls__delay__sliders__slider-repeat">
+                <CircleSlider
+                  value={delayFeedbackSlider}
+                  size={45}
+                  shadow={false}
+                  knobColor={knobColor}
+                  showTooltip={false}
+                  showPercentage={false}
+                  progressColor="#d8d6d6"
+                  knobRadius={4.5}
+                  min={0}
+                  max={0.9}
+                  stepSize={0.1}
+                  tooltipSize={1}
+                  circleWidth={0}
+                  progressWidth={10}
+                  onChange={handleDelayFeedback}
+                />
+              </div>
+              <label className="controls__delay__sliders__label-repeat">
+                Repeat
+              </label>
             </div>
-            <label className="controls__delay__sliders__label-repeat">Repeat</label>
-          </div>
           </div>
           <div className="controls__delay__switches">
             <div>
