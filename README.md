@@ -6,11 +6,11 @@ Play with your Midi device or your computer keyboard
 
 Try it out here: 
 
-Using: @react-midi-hooks 
-"https://github.com/nickroberts404/react-midi-hooks#readme"
+Using: @react-midi-hooks <br/>
+https://github.com/nickroberts404/react-midi-hooks#readme
 
-And: react-circle-slider, for circular range sliders 
-"https://github.com/dmitrymorozoff/react-circle-slider"
+And: react-circle-slider, for circular range sliders <br/>
+https://github.com/dmitrymorozoff/react-circle-slider
 
 
 
