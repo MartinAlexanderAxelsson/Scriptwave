@@ -11,12 +11,12 @@ export default function MIDI({
   setMIDI_connected,
   MIDI_connected,
   setMIDI_alert_message,
-  setUser_interaction_message, 
-  check_user_interaction
+  setUser_interaction_message,
+  check_user_interaction,
 }) {
   //   var midi
 
-     const { audio } = useContext(AudioContext)
+  const { audio } = useContext(AudioContext)
 
   //   // request MIDI access
   //   if (navigator.requestMIDIAccess) {
@@ -164,15 +164,13 @@ export default function MIDI({
     setMIDI_alert_message("unset")
   }
   if (input) {
-
     if (input.state === "connected") {
       setMIDI_connected(true)
       if (check_user_interaction === false) {
-        setUser_interaction_message('unset')
+        setUser_interaction_message("unset")
       } else {
-        setUser_interaction_message('none')
+        setUser_interaction_message("none")
       }
-    
     }
   }
 
@@ -183,7 +181,6 @@ export default function MIDI({
   const event = useMIDINote(input, { channel: 0 }) // Intially returns undefined
 
   function play_MIDI_Note() {
-   
     let MIDI_note_pressed = "key" + event.note
 
     oscillator_1((key = MIDI_notes[MIDI_note_pressed]))
@@ -194,9 +191,8 @@ export default function MIDI({
 
   if (event) {
     if (event.on === true) {
-   
       play_MIDI_Note()
-  
+
       return (event.on = false)
     }
   }

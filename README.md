@@ -1,3 +1,21 @@
+# Scriptwave
+A Midi compatible synth made with React and the Web Audio Api
+Play with your Midi device or your computer keyboard
+
+<img src="../src/images/scriptwave_screenshot.png"/>
+
+Try it out here: 
+
+Using: @react-midi-hooks 
+<a href="https://github.com/nickroberts404/react-midi-hooks#readme"><a>
+
+And: react-circle-slider, for circular range sliders 
+<a href="https://github.com/dmitrymorozoff/react-circle-slider"><a>
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

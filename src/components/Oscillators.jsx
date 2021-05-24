@@ -368,18 +368,16 @@ export default function Oscillators() {
   }
 
   const [MIDI_alert_message, setMIDI_alert_message] = useState("none")
-  const [user_interaction_message, setUser_interaction_message] = useState("none")
+  const [user_interaction_message, setUser_interaction_message] =
+    useState("none")
   const [check_user_interaction, setCheck_user_interaction] = useState(false)
   const listenerClick = (event) => {
     setCheck_user_interaction(true)
-
-}
+  }
 
   useEffect(() => {
-  
     window.addEventListener("click", listenerClick)
     return () => {
-  
       window.removeEventListener("click", listenerClick)
     }
   }, [])
@@ -399,7 +397,7 @@ export default function Oscillators() {
           style={{ display: user_interaction_message }}
         >
           <img className="user-interaction__img" src={warning} /> Click anywhere
-          on the page to start playing your Midi device
+          on the page to enable your Midi device
         </div>
         <div
           className="oscillators"
