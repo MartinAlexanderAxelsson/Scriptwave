@@ -2,15 +2,15 @@
 A Midi compatible synth made with React and the Web Audio Api <br/>
 Play with your Midi device or your computer keyboard
 
-<img src="../src/images/scriptwave_screenshot.png"><img>
+<img src="./src/images/scriptwave_screenshot.png"><img>
 
 Try it out here: 
 
 Using: @react-midi-hooks 
-<a href="https://github.com/nickroberts404/react-midi-hooks#readme"><a>
+"https://github.com/nickroberts404/react-midi-hooks#readme"
 
 And: react-circle-slider, for circular range sliders 
-<a href="https://github.com/dmitrymorozoff/react-circle-slider"><a>
+"https://github.com/dmitrymorozoff/react-circle-slider"
 
 
 
