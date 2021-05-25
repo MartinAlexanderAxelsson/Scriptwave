@@ -5,7 +5,9 @@ import "./styles/oscillators.scss"
 import { AudioContext } from "../context/AudioContext"
 import MIDI from "./MIDI"
 import warning from "../images/warning_icon.png"
-import {MIDI_notes} from '../components/note_frequencies'
+import { MIDI_notes } from "../components/note_frequencies"
+import github_logo_white from "../images/GitHub-Mark-Light-120px-plus.png"
+import github_logo_black from "../images/GitHub-Mark-120px-plus.png"
 
 export default function Oscillators() {
   const { audio } = useContext(AudioContext)
@@ -132,24 +134,30 @@ export default function Oscillators() {
   }
   const [waveFormOsc1, setWaveFormOsc1] = useState("sine")
   const [waveFormOsc2, setWaveFormOsc2] = useState("sine")
+
   const [selectedFilterType, setSelectedFilterType] = useState("lowpass")
 
   const [masterVolSlider, setMasterVolSlider] = useState(0.25)
   const [osc_1_VolSlider, setOsc_1_VolSlider] = useState(0.25)
   const [osc_2_VolSlider, setOsc_2_VolSlider] = useState(0.25)
+
   const [osc1DetuneSlider, setOsc1DetuneSlider] = useState(0)
   const [noiseSlider, setNoiseSlider] = useState(0)
-
   const [filterSlider, setFilterSlider] = useState(9200)
+
   const [envelope_A_Slider, setEnvelope_A_Slider] = useState(0.001)
   const [envelope_D_Slider, setEnvelope_D_Slider] = useState(0.2)
   const [envelope_S_Slider, setEnvelope_S_Slider] = useState(0.2)
   const [envelope_R_Slider, setEnvelope_R_Slider] = useState(1.1)
+
   const [delaySlider, setDelaySlider] = useState(0)
   const [delayFeedbackSlider, setDelayFeedbackSlider] = useState(0)
-  const [delayOnOff, setDelayOnOff] = useState(0)
 
   const [MIDI_connected, setMIDI_connected] = useState(false)
+  const [MIDI_alert_message, setMIDI_alert_message] = useState("none")
+  const [user_interaction_message, setUser_interaction_message] =
+    useState("none")
+  const [check_user_interaction, setCheck_user_interaction] = useState(false)
 
   const [darkmode, setDarkmode] = useState(true)
   const [keyMapping, setKeyMapping] = useState({
@@ -157,16 +165,21 @@ export default function Oscillators() {
     black: "key-mapping__black",
   })
 
+  const [github_logo, setGithub_logo] = useState(github_logo_white)
+
   const [mainBackgroundColor, setMainBackgroundColor] = useState("#1a1a1a")
   const [synthBackgroundColor, setsynthBackgroundColor] =
     useState("rgb(77, 77, 77)")
+
   function toggleDarkmode() {
     if (darkmode === true) {
       setMainBackgroundColor("#1a1a1a")
       setsynthBackgroundColor("rgb(77, 77, 77)")
+      setGithub_logo(github_logo_white)
     } else {
       setMainBackgroundColor("#bdddda")
       setsynthBackgroundColor("#97bfc9")
+      setGithub_logo(github_logo_black)
     }
   }
 
@@ -174,35 +187,29 @@ export default function Oscillators() {
     toggleDarkmode()
   }, [toggleDarkmode])
 
-  let note
   let masterVolume = audio.createGain()
-  let delay = audio.createDelay()
-  let delayFeedback = audio.createGain()
-
   let osc_1_Volume = audio.createGain()
   let osc_2_Volume = audio.createGain()
-
+  let delay = audio.createDelay()
+  let delayFeedback = audio.createGain()
   let filter = audio.createBiquadFilter()
 
   masterVolume.gain.value = masterVolSlider
   filter.q = 5
   filter.type = selectedFilterType
   filter.frequency.value = filterSlider
-  //   delayFeedback.gain.value = delayOnOff
   delayFeedback.gain.value = delayFeedbackSlider
   delay.delayTime.value = delaySlider
-
   osc_1_Volume.gain.value = osc_1_VolSlider
   osc_2_Volume.gain.value = osc_2_VolSlider
 
   let key
 
-
-
   function oscillator_1(key) {
     let osc = audio.createOscillator()
     let envelope = audio.createGain()
     osc.detune.value = osc1DetuneSlider
+    osc.type = waveFormOsc1
 
     if (key && MIDI_notes[key]) {
       osc.frequency.value = MIDI_notes[key][0]
@@ -211,8 +218,6 @@ export default function Oscillators() {
     if (key && notes[key]) {
       osc.frequency.value = notes[key]
     }
-
-    osc.type = waveFormOsc1
 
     envelope.gain.setValueAtTime(0, audio.currentTime)
     envelope.gain.linearRampToValueAtTime(
@@ -264,16 +269,15 @@ export default function Oscillators() {
   function oscillator_2(key) {
     let osc2 = audio.createOscillator()
     let envelope = audio.createGain()
+    osc2.type = waveFormOsc2
 
     if (key && MIDI_notes[key]) {
-        osc2.frequency.value = MIDI_notes[key][0]
-      }
-  
-      if (key && notes[key]) {
-        osc2.frequency.value = notes[key]
-      }
+      osc2.frequency.value = MIDI_notes[key][0]
+    }
 
-    osc2.type = waveFormOsc2
+    if (key && notes[key]) {
+      osc2.frequency.value = notes[key]
+    }
 
     envelope.gain.setValueAtTime(0, audio.currentTime)
     envelope.gain.linearRampToValueAtTime(
@@ -323,8 +327,8 @@ export default function Oscillators() {
     let noise = audio.createBufferSource()
     let envelope = audio.createGain()
     let noiseVolume = audio.createGain()
-    let bufferSize = 5 * audio.sampleRate
 
+    let bufferSize = 5 * audio.sampleRate
     let buffer = audio.createBuffer(1, bufferSize, audio.sampleRate)
     let output = buffer.getChannelData(0)
 
@@ -385,10 +389,6 @@ export default function Oscillators() {
     )
   }
 
-  const [MIDI_alert_message, setMIDI_alert_message] = useState("none")
-  const [user_interaction_message, setUser_interaction_message] =
-    useState("none")
-  const [check_user_interaction, setCheck_user_interaction] = useState(false)
   const listenerClick = (event) => {
     setCheck_user_interaction(true)
   }
@@ -416,6 +416,11 @@ export default function Oscillators() {
         >
           <img className="user-interaction__img" src={warning} /> Click anywhere
           on the page to enable your Midi device
+        </div>
+        <div className="github-logo">
+          <a href="https://github.com/MartinAlexanderAxelsson/Scriptwave">
+            <img className="github-logo__img" src={github_logo} />
+          </a>
         </div>
         <div
           className="oscillators"
@@ -454,8 +459,6 @@ export default function Oscillators() {
             setDelaySlider={setDelaySlider}
             delayFeedbackSlider={delayFeedbackSlider}
             setDelayFeedbackSlider={setDelayFeedbackSlider}
-            //delayOnOff={delayOnOff}
-            setDelayOnOff={setDelayOnOff}
             octaveUp={octaveUp}
             octaveDown={octaveDown}
             keyMapping={keyMapping}
@@ -468,7 +471,6 @@ export default function Oscillators() {
             keyMapping={keyMapping}
             darkmode={darkmode}
             notes={notes}
-            //delayOnOff={delayOnOff}
             waveForms={waveForms}
             oscillator_1={oscillator_1}
             oscillator_2={oscillator_2}
@@ -476,7 +478,6 @@ export default function Oscillators() {
             key={key}
             keyClassNames={keyClassNames}
             setKeyClassNames={setKeyClassNames}
-    
           />
           <MIDI
             oscillator_1={oscillator_1}
@@ -491,7 +492,6 @@ export default function Oscillators() {
             check_user_interaction={check_user_interaction}
             keyClassNames={keyClassNames}
             setKeyClassNames={setKeyClassNames}
-       
           />
         </div>
       </div>

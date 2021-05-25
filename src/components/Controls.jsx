@@ -38,8 +38,6 @@ export default function Controls({
   setDelaySlider,
   delayFeedbackSlider,
   setDelayFeedbackSlider,
-  //delayOnOff,
-  setDelayOnOff,
   octaveUp,
   octaveDown,
   keyMapping,
@@ -228,16 +226,12 @@ export default function Controls({
     setOsc1_light("hidden")
     setOsc2_light("visible")
   }
-  console.log(noiseSlider)
+
   useEffect(() => {
     toggleDarkmode()
     MIDI_ligtOnOff()
     if (delaySlider == 0) {
-      //   setDelayOnOff(0)
       setDelayFeedbackSlider(0)
-      //disable delay or feedback
-    } else {
-      //   setDelayOnOff(0.2)
     }
   }, [delaySlider, toggleDarkmode])
 
@@ -263,11 +257,8 @@ export default function Controls({
               min={0}
               max={0.5}
               stepSize={0.01}
-              circleColor="#f7931e;"
-              tooltipSize={1}
-              tooltipColor="#ff5722"
               circleWidth={0}
-              progressWidth={10}
+              progressWidth={0}
               onChange={handleMasterVolume}
             />
           </div>
@@ -313,12 +304,8 @@ export default function Controls({
                   min={0}
                   max={0.5}
                   stepSize={0.01}
-                  circleColor="#ff5722"
-                  tooltipSize={1}
-                  tooltipColor="#ff5722"
                   circleWidth={0}
-                  progressWidth={10}
-                  circleColor="#ff5722"
+                  progressWidth={0}
                   onChange={handleOsc_1_Volume}
                 />
               </div>
@@ -349,12 +336,8 @@ export default function Controls({
                   min={0}
                   max={0.5}
                   stepSize={0.01}
-                  circleColor="#ff5722"
-                  tooltipSize={1}
-                  tooltipColor="#ff5722"
                   circleWidth={0}
-                  progressWidth={10}
-                  circleColor="#ff5722"
+                  progressWidth={0}
                   onChange={handleOsc_2_Volume}
                 />
               </div>
@@ -446,12 +429,8 @@ export default function Controls({
               min={-100}
               max={100}
               stepSize={1}
-              circleColor="#ff5722"
-              tooltipSize={1}
-              tooltipColor="#ff5722"
               circleWidth={0}
-              progressWidth={10}
-              circleColor="#ff5722"
+              progressWidth={0}
               onChange={handleDetune}
             />
           </div>
@@ -474,8 +453,6 @@ export default function Controls({
               min={0}
               max={1}
               stepSize={0.1}
-              circleColor="#ff5722"
-              tooltipSize={1}
               circleWidth={0}
               progressWidth={10}
               onChange={handleNoise_volume}
@@ -540,11 +517,6 @@ export default function Controls({
               min={0}
               max={10000}
               stepSize={0.1}
-              //   circleColor="#ff5722"  FIX THIS FOR REST OF SLIDERS TO!!!!!!!!
-              //   tooltipSize={1}
-              //   tooltipColor="#ff5722"
-              //   circleWidth={0}
-              //   progressWidth={10}
               circleColor="#1a1a1a"
               onChange={handleFilter}
             />
@@ -634,12 +606,8 @@ export default function Controls({
                   min={0}
                   max={1}
                   stepSize={0.1}
-                  circleColor="#ff5722"
-                  tooltipSize={1}
-                  tooltipColor="#ff5722"
                   circleWidth={0}
-                  progressWidth={10}
-                  circleColor="#ff5722"
+                  progressWidth={0}
                   onChange={handleDelay}
                 />
               </div>
@@ -661,9 +629,8 @@ export default function Controls({
                   min={0}
                   max={0.9}
                   stepSize={0.1}
-                  tooltipSize={1}
                   circleWidth={0}
-                  progressWidth={10}
+                  progressWidth={0}
                   onChange={handleDelayFeedback}
                 />
               </div>

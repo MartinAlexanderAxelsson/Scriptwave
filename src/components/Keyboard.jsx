@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react"
-// import "./keyboard.scss"
 import "./styles/keyboard.css"
 import { AudioContext } from "../context/AudioContext"
 
@@ -14,10 +13,7 @@ export default function Keyboard({
   darkmode,
   keyClassNames,
   setKeyClassNames,
-
 }) {
-
-
   const { audio } = useContext(AudioContext)
   const root = document.documentElement
   root.style.setProperty(
@@ -45,39 +41,13 @@ export default function Keyboard({
     darkmode ? "rgb(250, 116, 39)" : "rgb(255, 219, 99)"
   )
 
-  // deklarera upp i osc komponenten skicka sen till midi och keyboard för att komma åt classname i midi komp
-  // och lysa upp keyboarden
-//   const [className, setClassName] = useState({
-//     KeyA: "KeyA",
-//     KeyW: "KeyW",
-//     KeyS: "KeyS",
-//     KeyE: "KeyE",
-//     KeyD: "KeyD",
-//     KeyR: "KeyR",
-//     KeyF: "KeyF",
-//     KeyG: "KeyG",
-//     KeyY: "KeyY",
-//     KeyH: "KeyH",
-//     KeyU: "KeyU",
-//     KeyJ: "KeyJ",
-//     KeyK: "KeyK",
-//     KeyO: "KeyO",
-//     KeyL: "KeyL",
-//     KeyP: "KeyP",
-//     Semicolon: "Semicolon",
-//     BracketLeft: "BracketLeft",
-//     Quote: "Quote",
-//   })
-
   function playNote() {
     oscillator_1(key)
     oscillator_2(key)
     whiteNoise()
   }
 
-
   const listenerKeyDown = (event) => {
-
     const pressedKey = event.code
 
     const allKeys = Object.keys(notes).map((allKeys) => {
@@ -87,25 +57,31 @@ export default function Keyboard({
     const match = allKeys.find((e) => e === pressedKey)
 
     if (match) {
-     if (event.repeat) return
+      if (event.repeat) return
 
       playNote((key = pressedKey))
 
       if (keyClassNames[pressedKey] == `${pressedKey}-hit`) {
-        setKeyClassNames({ ...keyClassNames, [pressedKey]: `${pressedKey}-hit2` })
+        setKeyClassNames({
+          ...keyClassNames,
+          [pressedKey]: `${pressedKey}-hit2`,
+        })
       } else {
-        setKeyClassNames({ ...keyClassNames, [pressedKey]: `${pressedKey}-hit` })
+        setKeyClassNames({
+          ...keyClassNames,
+          [pressedKey]: `${pressedKey}-hit`,
+        })
       }
     }
   }
-  console.log(waveForms)
+
   useEffect(() => {
     window.addEventListener("keydown", listenerKeyDown)
     return () => {
       window.removeEventListener("keydown", listenerKeyDown)
-
     }
   }, [waveForms, keyClassNames])
+
   return (
     <>
       <div className="keyboard">

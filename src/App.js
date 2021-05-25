@@ -20,7 +20,7 @@ function App() {
       <AudioContext.Provider value={{ audio }}>
     
         <Oscillators />
-        {/* <MIDI/> */}
+ 
       </AudioContext.Provider>
     </div>
   )
