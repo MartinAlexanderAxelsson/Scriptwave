@@ -2,9 +2,9 @@
 A Midi compatible synth made with React and the Web Audio Api <br/>
 Play with your Midi device or your computer keyboard
 
-<img src="./src/images/scriptwave_screenshot.png"><img>
-
 Try it out here: 
+
+<img src="./src/images/scriptwave_screenshot.png"><img>
 
 Using: @react-midi-hooks <br/>
 https://github.com/nickroberts404/react-midi-hooks#readme
@@ -14,7 +14,7 @@ https://github.com/dmitrymorozoff/react-circle-slider
 
 
 
-
+<!-- 
 
 # Getting Started with Create React App
 
@@ -85,4 +85,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `yarn build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->

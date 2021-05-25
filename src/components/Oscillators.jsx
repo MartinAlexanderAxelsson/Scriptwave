@@ -5,6 +5,7 @@ import "./styles/oscillators.scss"
 import { AudioContext } from "../context/AudioContext"
 import MIDI from "./MIDI"
 import warning from "../images/warning_icon.png"
+import {MIDI_notes} from '../components/note_frequencies'
 
 export default function Oscillators() {
   const { audio } = useContext(AudioContext)
@@ -51,27 +52,27 @@ export default function Oscillators() {
     Quote: b2,
   }
 
-  //   const MIDI_notes = {
-  //     key53: "KeyA",
-  //     key54: "KeyW",
-  //     key55: "KeyS",
-  //     key56: "KeyE",
-  //     key57: "KeyD",
-  //     key58: "KeyR",
-  //     key59: "KeyF",
-  //     key60: "KeyG",
-  //     key61: "KeyY",
-  //     key62: "KeyH",
-  //     key63: "KeyU",
-  //     key64: "KeyJ",
-  //     key65: "KeyK",
-  //     key66: "KeyO",
-  //     key67: "KeyL",
-  //     key68: "KeyP",
-  //     key69: "Semicolon",
-  //     key70: "BracketLeft",
-  //     key71: "Quote",
-  //   }
+  const [keyClassNames, setKeyClassNames] = useState({
+    KeyA: "KeyA",
+    KeyW: "KeyW",
+    KeyS: "KeyS",
+    KeyE: "KeyE",
+    KeyD: "KeyD",
+    KeyR: "KeyR",
+    KeyF: "KeyF",
+    KeyG: "KeyG",
+    KeyY: "KeyY",
+    KeyH: "KeyH",
+    KeyU: "KeyU",
+    KeyJ: "KeyJ",
+    KeyK: "KeyK",
+    KeyO: "KeyO",
+    KeyL: "KeyL",
+    KeyP: "KeyP",
+    Semicolon: "Semicolon",
+    BracketLeft: "BracketLeft",
+    Quote: "Quote",
+  })
 
   function octaveUp() {
     setF(f * 2)
@@ -196,11 +197,21 @@ export default function Oscillators() {
 
   let key
 
+
+
   function oscillator_1(key) {
     let osc = audio.createOscillator()
     let envelope = audio.createGain()
     osc.detune.value = osc1DetuneSlider
-    osc.frequency.value = notes[key]
+
+    if (key && MIDI_notes[key]) {
+      osc.frequency.value = MIDI_notes[key][0]
+    }
+
+    if (key && notes[key]) {
+      osc.frequency.value = notes[key]
+    }
+
     osc.type = waveFormOsc1
 
     envelope.gain.setValueAtTime(0, audio.currentTime)
@@ -254,7 +265,14 @@ export default function Oscillators() {
     let osc2 = audio.createOscillator()
     let envelope = audio.createGain()
 
-    osc2.frequency.value = notes[key]
+    if (key && MIDI_notes[key]) {
+        osc2.frequency.value = MIDI_notes[key][0]
+      }
+  
+      if (key && notes[key]) {
+        osc2.frequency.value = notes[key]
+      }
+
     osc2.type = waveFormOsc2
 
     envelope.gain.setValueAtTime(0, audio.currentTime)
@@ -456,18 +474,24 @@ export default function Oscillators() {
             oscillator_2={oscillator_2}
             whiteNoise={whiteNoise}
             key={key}
+            keyClassNames={keyClassNames}
+            setKeyClassNames={setKeyClassNames}
+    
           />
           <MIDI
             oscillator_1={oscillator_1}
             oscillator_2={oscillator_2}
             whiteNoise={whiteNoise}
             key={key}
-            // MIDI_notes={MIDI_notes}
+            MIDI_notes={MIDI_notes}
             setMIDI_connected={setMIDI_connected}
             MIDI_connected={MIDI_connected}
             setMIDI_alert_message={setMIDI_alert_message}
             setUser_interaction_message={setUser_interaction_message}
             check_user_interaction={check_user_interaction}
+            keyClassNames={keyClassNames}
+            setKeyClassNames={setKeyClassNames}
+       
           />
         </div>
       </div>

@@ -1,18 +1,21 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useMIDI, useMIDINote } from "@react-midi/hooks"
 import { AudioContext } from "../context/AudioContext"
-
+// import {MIDI_notes} from '../components/note_frequencies'
 export default function MIDI({
-  //   MIDI_notes,
+  MIDI_notes,
   oscillator_1,
   oscillator_2,
   whiteNoise,
   key,
+
   setMIDI_connected,
   MIDI_connected,
   setMIDI_alert_message,
   setUser_interaction_message,
   check_user_interaction,
+  keyClassNames,
+  setKeyClassNames,
 }) {
   //   var midi
 
@@ -134,27 +137,72 @@ export default function MIDI({
   //     )
   //   }
 
-  const MIDI_notes = {
-    key53: "KeyA",
-    key54: "KeyW",
-    key55: "KeyS",
-    key56: "KeyE",
-    key57: "KeyD",
-    key58: "KeyR",
-    key59: "KeyF",
-    key60: "KeyG",
-    key61: "KeyY",
-    key62: "KeyH",
-    key63: "KeyU",
-    key64: "KeyJ",
-    key65: "KeyK",
-    key66: "KeyO",
-    key67: "KeyL",
-    key68: "KeyP",
-    key69: "Semicolon",
-    key70: "BracketLeft",
-    key71: "Quote",
-  }
+  //41-83
+  //   const [f, setF] = useState(349.228)
+  //   const [gb, setGb] = useState(369.994)
+  //   const [g, setG] = useState(391.995)
+  //   const [ab, setAb] = useState(415.305)
+  //   const [a, setA] = useState(440)
+  //   const [bb, setBb] = useState(466.164)
+  //   const [b, setB] = useState(493.883)
+  //   const [c, setC] = useState(523.251)
+  //   const [db, setDb] = useState(554.365)
+  //   const [d, setD] = useState(587.33)
+  //   const [eb, setEb] = useState(622.254)
+  //   const [e, setE] = useState(659.255)
+  //   const [f2, setF2] = useState(698.456)
+  //   const [gb2, setGb2] = useState(739.989)
+  //   const [g2, setG2] = useState(783.991)
+  //   const [ab2, setAb2] = useState(830.609)
+  //   const [a2, setA2] = useState(880)
+  //   const [bb2, setBb2] = useState(932.328)
+  //   const [b2, setB2] = useState(987.767)
+
+  //   const MIDI_notes = {
+  //     key41: 'key41',
+  //     key42: 'key42',
+  //     key43: 'key43',
+  //     key44: 'key44',
+  //     key45: 'key45',
+  //     key46: 'key46',
+  //     key47: 'key47',
+  //     key48: 'key48',
+  //     key49: 'key49',
+  //     key50: 'key50',
+  //     key51: 'key51',
+  //     key52: 'key52',
+  //     key53: "KeyA",
+  //     key54: "KeyW",
+  //     key55: "KeyS",
+  //     key56: "KeyE",
+  //     key57: "KeyD",
+  //     key58: "KeyR",
+  //     key59: "KeyF",
+  //     key60: "KeyG",
+  //     key61: "KeyY",
+  //     key62: "KeyH",
+  //     key63: "KeyU",
+  //     key64: "KeyJ",
+  //     key65: "KeyK",
+  //     key66: "KeyO",
+  //     key67: "KeyL",
+  //     key68: "KeyP",
+  //     key69: "Semicolon",
+  //     key70: "BracketLeft",
+  //     key71: "Quote",
+  //     key72: 'key72',
+  //     key73: 'key73',
+  //     key74: 'key74',
+  //     key75: 'key75',
+  //     key76: 'key76',
+  //     key77: 'key77',
+  //     key78: 'key78',
+  //     key79: 'key79',
+  //     key80: 'key80',
+  //     key81: 'key81',
+  //     key82: 'key82',
+  //     key83: 'key82',
+  //   }
 
   const { inputs, outputs, hasMIDI } = useMIDI()
 
@@ -182,10 +230,60 @@ export default function MIDI({
 
   function play_MIDI_Note() {
     let MIDI_note_pressed = "key" + event.note
+    const allKeys = Object.keys(MIDI_notes).map((allKeys) => {
+      return allKeys
+    })
+    console.log(MIDI_note_pressed)
+    const match = allKeys.find((e) => e === MIDI_note_pressed)
 
-    oscillator_1((key = MIDI_notes[MIDI_note_pressed]))
-    oscillator_2((key = MIDI_notes[MIDI_note_pressed]))
+    //   if (match) {
+    //     oscillator_1((key = MIDI_notes[MIDI_note_pressed]))
+    //     oscillator_2((key = MIDI_notes[MIDI_note_pressed]))
+    //     whiteNoise()
+    //     if (
+    //       keyClassNames[MIDI_notes[MIDI_note_pressed]] ==
+    //       `${MIDI_notes[MIDI_note_pressed]}-hit`
+    //     ) {
+    //       setKeyClassNames({
+    //         ...keyClassNames,
+    //         [MIDI_notes[
+    //           MIDI_note_pressed
+    //         ]]: `${MIDI_notes[MIDI_note_pressed]}-hit2`,
+    //       })
+    //     } else {
+    //       setKeyClassNames({
+    //         ...keyClassNames,
+    //         [MIDI_notes[
+    //           MIDI_note_pressed
+    //         ]]: `${MIDI_notes[MIDI_note_pressed]}-hit`,
+    //       })
+    //     }
+    //   }
+
+    oscillator_1((key = MIDI_note_pressed))
+    oscillator_2((key = MIDI_note_pressed))
     whiteNoise()
+
+    if (MIDI_note_pressed > 'key' + 53 || MIDI_note_pressed < 'key' + 72) {
+      if (
+        keyClassNames[MIDI_notes[MIDI_note_pressed][1]] ==
+        `${MIDI_notes[MIDI_note_pressed][1]}-hit`
+      ) {
+        setKeyClassNames({
+          ...keyClassNames,
+          [MIDI_notes[
+            MIDI_note_pressed
+          ][1]]: `${MIDI_notes[MIDI_note_pressed][1]}-hit2`,
+        })
+      } else {
+        setKeyClassNames({
+          ...keyClassNames,
+          [MIDI_notes[
+            MIDI_note_pressed
+          ][1]]: `${MIDI_notes[MIDI_note_pressed][1]}-hit`,
+        })
+      }
+    }
   }
   // console.log(inputs[0].state)
 

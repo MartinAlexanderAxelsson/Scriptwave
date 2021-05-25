@@ -12,8 +12,11 @@ export default function Keyboard({
   key,
   keyMapping,
   darkmode,
+  keyClassNames,
+  setKeyClassNames,
+
 }) {
-  //fix blackkeys keyhit in non darkmode (fades to darkmode color) in keyboard CSS file
+
 
   const { audio } = useContext(AudioContext)
   const root = document.documentElement
@@ -44,27 +47,27 @@ export default function Keyboard({
 
   // deklarera upp i osc komponenten skicka sen till midi och keyboard för att komma åt classname i midi komp
   // och lysa upp keyboarden
-  const [className, setClassName] = useState({
-    KeyA: "KeyA",
-    KeyW: "KeyW",
-    KeyS: "KeyS",
-    KeyE: "KeyE",
-    KeyD: "KeyD",
-    KeyR: "KeyR",
-    KeyF: "KeyF",
-    KeyG: "KeyG",
-    KeyY: "KeyY",
-    KeyH: "KeyH",
-    KeyU: "KeyU",
-    KeyJ: "KeyJ",
-    KeyK: "KeyK",
-    KeyO: "KeyO",
-    KeyL: "KeyL",
-    KeyP: "KeyP",
-    Semicolon: "Semicolon",
-    BracketLeft: "BracketLeft",
-    Quote: "Quote",
-  })
+//   const [className, setClassName] = useState({
+//     KeyA: "KeyA",
+//     KeyW: "KeyW",
+//     KeyS: "KeyS",
+//     KeyE: "KeyE",
+//     KeyD: "KeyD",
+//     KeyR: "KeyR",
+//     KeyF: "KeyF",
+//     KeyG: "KeyG",
+//     KeyY: "KeyY",
+//     KeyH: "KeyH",
+//     KeyU: "KeyU",
+//     KeyJ: "KeyJ",
+//     KeyK: "KeyK",
+//     KeyO: "KeyO",
+//     KeyL: "KeyL",
+//     KeyP: "KeyP",
+//     Semicolon: "Semicolon",
+//     BracketLeft: "BracketLeft",
+//     Quote: "Quote",
+//   })
 
   function playNote() {
     oscillator_1(key)
@@ -88,10 +91,10 @@ export default function Keyboard({
 
       playNote((key = pressedKey))
 
-      if (className[pressedKey] == `${pressedKey}-hit`) {
-        setClassName({ ...className, [pressedKey]: `${pressedKey}-hit2` })
+      if (keyClassNames[pressedKey] == `${pressedKey}-hit`) {
+        setKeyClassNames({ ...keyClassNames, [pressedKey]: `${pressedKey}-hit2` })
       } else {
-        setClassName({ ...className, [pressedKey]: `${pressedKey}-hit` })
+        setKeyClassNames({ ...keyClassNames, [pressedKey]: `${pressedKey}-hit` })
       }
     }
   }
@@ -102,73 +105,73 @@ export default function Keyboard({
       window.removeEventListener("keydown", listenerKeyDown)
 
     }
-  }, [waveForms, className])
+  }, [waveForms, keyClassNames])
   return (
     <>
       <div className="keyboard">
         <div className="keyboard__white-key__wrapper">
           <button
-            className={className.KeyA}
+            className={keyClassNames.KeyA}
             onClick={(e) => playNote((key = "KeyA"))}
           >
             <div className={keyMapping.white}>A</div>
           </button>
           <button
-            className={className.KeyS}
+            className={keyClassNames.KeyS}
             onClick={(e) => playNote((key = "KeyS"))}
           >
             <div className={keyMapping.white}>S</div>
           </button>
           <button
-            className={className.KeyD}
+            className={keyClassNames.KeyD}
             onClick={(e) => playNote((key = "KeyD"))}
           >
             <div className={keyMapping.white}>D</div>
           </button>
           <button
-            className={className.KeyF}
+            className={keyClassNames.KeyF}
             onClick={(e) => playNote((key = "KeyF"))}
           >
             <div className={keyMapping.white}>F</div>
           </button>
           <button
-            className={className.KeyG}
+            className={keyClassNames.KeyG}
             onClick={(e) => playNote((key = "KeyG"))}
           >
             <div className={keyMapping.white}>G</div>
           </button>
           <button
-            className={className.KeyH}
+            className={keyClassNames.KeyH}
             onClick={(e) => playNote((key = "KeyH"))}
           >
             <div className={keyMapping.white}>H</div>
           </button>
           <button
-            className={className.KeyJ}
+            className={keyClassNames.KeyJ}
             onClick={(e) => playNote((key = "KeyJ"))}
           >
             <div className={keyMapping.white}>J</div>
           </button>
           <button
-            className={className.KeyK}
+            className={keyClassNames.KeyK}
             onClick={(e) => playNote((key = "KeyK"))}
           >
             <div className={keyMapping.white}>K</div>
           </button>
           <button
-            className={className.KeyL}
+            className={keyClassNames.KeyL}
             onClick={(e) => playNote((key = "KeyL"))}
           >
             <div className={keyMapping.white}>L</div>
           </button>
           <button
-            className={className.Semicolon}
+            className={keyClassNames.Semicolon}
             onClick={(e) => playNote((key = "Semicolon"))}
           >
             <div className={keyMapping.white}>Ö</div>
           </button>
           <button
-            className={className.Quote}
+            className={keyClassNames.Quote}
             onClick={(e) => playNote((key = "Quote"))}
           >
             <div className={keyMapping.white}>Ä</div>
@@ -176,49 +179,49 @@ export default function Keyboard({
         </div>
         {/* <div className="keyboard__black-key__wrapper"> */}
         <button
-          className={className.KeyW}
+          className={keyClassNames.KeyW}
           onClick={(e) => playNote((key = "KeyW"))}
         >
           <div className={keyMapping.black}>W</div>
         </button>
         <button
-          className={className.KeyE}
+          className={keyClassNames.KeyE}
           onClick={(e) => playNote((key = "KeyE"))}
         >
           <div className={keyMapping.black}>E</div>
         </button>
         <button
-          className={className.KeyR}
+          className={keyClassNames.KeyR}
           onClick={(e) => playNote((key = "KeyR"))}
         >
           <div className={keyMapping.black}>R</div>
         </button>
         <button
-          className={className.KeyY}
+          className={keyClassNames.KeyY}
           onClick={(e) => playNote((key = "KeyY"))}
         >
           <div className={keyMapping.black}>Y</div>
         </button>
         <button
-          className={className.KeyU}
+          className={keyClassNames.KeyU}
           onClick={(e) => playNote((key = "KeyU"))}
         >
           <div className={keyMapping.black}>U</div>
         </button>
         <button
-          className={className.KeyO}
+          className={keyClassNames.KeyO}
           onClick={(e) => playNote((key = "KeyO"))}
         >
           <div className={keyMapping.black}>O</div>
         </button>
         <button
-          className={className.KeyP}
+          className={keyClassNames.KeyP}
           onClick={(e) => playNote((key = "KeyP"))}
         >
           <div className={keyMapping.black}>P</div>
         </button>
         <button
-          className={className.BracketLeft}
+          className={keyClassNames.BracketLeft}
           onClick={(e) => playNote((key = "BracketLeft"))}
         >
           <div className={keyMapping.black}>Å</div>
