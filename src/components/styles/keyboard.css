@@ -92,6 +92,7 @@
 
 /* ----------------white keys---------------- */
 
+
 .KeyA,
 .KeyA-hit,
 .KeyA-hit2 {
@@ -99,10 +100,11 @@
   height: 250px;
   width: 90px;
   background-color: rgb(189, 221, 218);
-  border-left: var(--border__whitekeys);
-  border-right: var(--border__whitekeys);
-  border-bottom: var(--border__whitekeys);
   border-top: none;
+  border: var(--border__whitekeys);
+  /* border-right: var(--border__whitekeys);
+  border-bottom: var(--border__whitekeys); */
+
   outline: none;
 }
 .Quote,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react"
 import "./styles/controls.scss"
-import "./styles/controls.css"
+import "./styles/controlsCSS.css"
 import { AudioContext } from "../context/AudioContext"
 import { CircleSlider } from "react-circle-slider"
 import logo from "../images/scriptwave_LOGO.png"

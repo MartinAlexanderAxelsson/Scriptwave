@@ -1,5 +1,6 @@
 {
   "name": "scriptwave",
+  "homepage": "https://von-goose.com/scriptwave",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
