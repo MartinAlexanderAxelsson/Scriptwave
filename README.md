@@ -2,7 +2,7 @@
 A Midi compatible synth made with React and the Web Audio Api <br/>
 Play with your Midi device or your computer keyboard
 
-Try it out here: https://www.scriptwave.von-goose.com
+Try it out here: https://scriptwave.vongoo.se
 
 <img src="./src/images/scriptwave_screenshot.png"><img>
 
